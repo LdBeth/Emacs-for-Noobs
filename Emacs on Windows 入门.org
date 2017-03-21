@@ -1,0 +1,375 @@
+#+TITLE: Emacs On Windows  新手指南
+#+STARTUP: showall
+
+* Table of Contents                                         :TOC:
+ - [[#我对-emacs-的理解][我对 =Emacs= 的理解]]
+ - [[#网上的优秀资源待补充][网上的优秀资源（待补充）]]
+   - [[#一年成为-emacs-高手像神一样使用编辑器-from-陈斌][一年成为 Emacs 高手(像神一样使用编辑器) from 陈斌。]]
+   - [[#spacemacs-rocks-from-子龙山人][Spacemacs-rocks from 子龙山人]]
+   - [[#emacs-中文论坛][Emacs 中文论坛]]
+   - [[#planet-emacsen][Planet Emacsen]]
+ - [[#emacs-on-windows-下载][=Emacs on Windows= 下载]]
+ - [[#emacs-on-windows-启动][=Emacs on Windows= 启动]]
+ - [[#设置-home-目录][设置 =HOME= 目录]]
+ - [[#对-emacs-进行简单配置][对 =Emacs= 进行简单配置]]
+ - [[#安装-package][安装 =package=]]
+ - [[#使用-aspell-来检查拼写][使用 =Aspell= 来检查拼写]]
+ - [[#如何使用大牛的配置][如何使用大牛的配置]]
+   - [[#如何使用-spacemacs][如何使用 Spacemacs]]
+   - [[#spacemacs-faq][Spacemacs FAQ]]
+     - [[#common][Common]]
+       - [[#为什么我自己安装的插件在启动时被删除了呢][为什么我自己安装的插件在启动时被删除了呢？]]
+       - [[#下载插件过程中一直出错怎么办][下载插件过程中一直出错，怎么办？]]
+       - [[#状态栏的分界符有些奇怪][状态栏的分界符有些奇怪]]
+       - [[#个人配置该放到哪里-user-init-还是-user-config][个人配置该放到哪里？ =user-init= 还是 =user-config=]]
+     - [[#如何][如何：]]
+       - [[#安装现有-layer-没有提供的-package][安装现有 Layer 没有提供的 package?]]
+       - [[#禁用某个-package][禁用某个 package?]]
+       - [[#在选定的-major-mode-里面禁用某个-package][在选定的 Major-mode 里面禁用某个 package？]]
+       - [[#在特定的-major-mode-中禁用自动补全-company][在特定的 major-mode 中禁用自动补全 company？]]
+       - [[#直接启用-vim-的-vitual-line-移动][直接启用 vim 的 vitual line 移动？]]
+       - [[#禁用某个-mode-的-evil-状态][禁用某个 mode 的 evil 状态]]
+       - [[#设置-path-emacs-调用程序的路径][设置 =$PATH= (Emacs 调用程序的路径)]]
+       - [[#防止选择文本占用系统剪贴板][防止选择文本占用系统剪贴板？]]
+       - [[#使用-spacemacs-作为-git-提交信息的编辑器][使用 Spacemacs 作为 Git 提交信息的编辑器]]
+       - [[#在-x11-终端下使用鼠标来复制粘贴][在 X11 终端下，使用鼠标来复制/粘贴]]
+       - [[#重映射粘贴键使其能够多次粘贴复制过的文本][重映射粘贴键使其能够多次粘贴复制过的文本？]]
+     - [[#windows][Windows]]
+       - [[#为什么字体很难看][为什么字体很难看？]]
+       - [[#如何让-emacs-显示图片收邮件上-irc][如何让 Emacs 显示图片、收邮件、上 IRC？]]
+       - [[#为什么-spacemacs-logo-图片不显示][为什么 Spacemacs Logo 图片不显示？]]
+       - [[#为什么有的插件无法安装][为什么有的插件无法安装？]]
+   - [[#如何使用子龙山人的配置][如何使用子龙山人的配置]]
+   - [[#如何使用陈斌的配置][如何使用陈斌的配置]]
+ - [[#待补充尽管提意见][待补充（尽管提意见）……]]
+
+* 我对 =Emacs= 的理解
+  1. 只要是关于文本的，它就能实现，前提是你会 lisp 语言。
+  2. Emacs 对 Windows 的支持是因为它的开发者想让大家体验自由软件，并希望大家可以
+     转向 Linux 系统。
+  3. 它是一个文本编辑器，只适合做关于文本类的事情，拿它去听音乐、看视频不是一个
+     好的选择。尽管 Hack Emacs 是一件有趣的事。
+  4. 请读一读[[https://github.com/redguardtoo/mastering-emacs-in-one-year-guide/blob/master/guide-zh.org][一年成为 Emacs 高手(像神一样使用编辑器)]]，坚定信仰。
+  5. 待补充……
+
+* 网上的优秀资源（待补充）
+** [[https://github.com/redguardtoo/mastering-emacs-in-one-year-guide/blob/master/guide-zh.org][一年成为 Emacs 高手(像神一样使用编辑器)]] from 陈斌。
+   这是不得不推荐的资源，因为他讲的真的很好。也包括一些 FAQ。
+
+** [[https://github.com/emacs-china/Spacemacs-rocks][Spacemacs-rocks]] from 子龙山人
+   一系列视频 (Season 2)，Emacs 入门&专业配置都讲 的很好。
+
+** [[https://emacs-china.org/][Emacs 中文论坛]]
+   可能是最好的中文论坛。
+
+** [[http://planet.emacsen.org][Planet Emacsen]]
+   学习 Lisp 有成以后可以来这里找些小众技巧，锻练英语阅读。
+
+* =Emacs on Windows= 下载
+  直接从[[https://www.gnu.org/software/emacs/][官网]] 下载是比较好的，选择一个临近的站点，直接下载即可。在下载页面都有官
+  方的文件说明。 =emacs-n-x86_64-w64-mingw32.zip (64 bit)= and
+  =emacs-n-i686-w64-mingw32.zip (32 bit)= 下载后直接解压即可。还有相对应的支持包
+  =emacs-n-x-deps.zip= , 把里面的文件复制进上面解压后的文件夹里，直接提供了图片
+  的 dll 文件支持。
+
+* =Emacs on Windows= 启动
+  解压后的文件里有四个文件夹：bin，libexec，share，var。直接运行 bin 文件夹里的
+  =runemacs.exe= 即可。如果没有用过 Emacs, 请运行快捷键 ~Ctrl-h t~ ，查看 Emacs 自
+  带的文档，很短，很实用。需要说明的是，Emacs 运行时有一个 Home 目录，它存放你的
+  Emacs 配置，比如快捷键设定、主题设定、package（可以理解为插件）下载之类的。查
+  看它也很简单， ~C-x C-f~ 后输入 ~/ 回车后看到的目录就是你的 HOME 目录，不过这
+  没有必要。在 Windows 平台上建议直接设定 Emacs 的工作目录：
+  share/emacs/site-lisp/subdirs.el 里面设定它的工作目录即可。
+
+* 设置 =HOME= 目录
+  可以参考[[https://emacs-china.org/t/windows-emacs/797/11][在 windows 平台将 emacs 绿色化的方法]]。下面说一下我配置：
+
+  我的目录结构：
+
+  #+begin_example
+    C:/TC/Software/Emacs:
+      |-Emacs-32bit
+      |-Emacs-64bit
+      |-Home
+      `-Home-spacemacs
+  #+end_example
+
+  编辑文件 C:/TC/Software/Emacs/Emacs-64bit/share/emacs/site-lisp/subdirs.el
+
+  #+begin_src emacs-lisp
+  ;; 原有代码不动
+  (if (fboundp 'normal-top-level-add-subdirs-to-load-path)
+  (normal-top-level-add-subdirs-to-load-path))
+  ;; 下面是增加的代码
+  ;; 设定变量 =Emacs= path: =C:/TC/Software/Emacs/=
+  (defvar Emacs (replace-regexp-in-string "Emacs.*/$" "Emacs/" data-directory :from-end)) ;; 去掉路径中 Emacs 后面的部分
+  ;; 设定 HOME 目录
+  (setenv "HOME" (concat Emacs "Home-spacemacs/"))
+
+  ;; 可以直接设定 HOME 目录
+  (setenv "HOME" "C:/TC/Software/Emacs/Home")
+  ;; 上面的 home 和 home-spacemacs 用来存放两份不同的配置。
+  #+end_src
+
+  如果你想把它放在优盘里，可以这样设置：
+  #+begin_src emacs-lisp
+  (defvar Emacs (concat (substring data-directory 0 3) "TC/Software/Emacs"))
+  ;; (substring data-directory 0 3)就相当于优盘的盘符
+  #+end_src
+
+* 对 =Emacs= 进行简单配置
+  HOME 目录怎么存放配置呢？打开 Emacs， ~C-x C-f~ 输入 =~/.emacs.d/init.el= 或者
+  =~/.emacs=提示是否要新建文件，yes 就可以了（我主要用 init.el，后面提到配置文件
+  也是指这个文件，这两个文件没有区别）。然后输入配置（举例）：
+
+  #+begin_src emacs-lisp
+  ;; 开启行号
+  (global-linum-mode 1)
+  #+end_src
+
+  输入之后在代码末尾 ~C-x C-e~ ，可以立即开启行号。或者， ~M-x eval-buffer~ 也可以。
+  以后你的配置都可以这样做，如果没有效果，请重启试试。
+
+* 安装 =package=
+  要想让 Emacs 可以高效的工作，可以 DIY（通过编辑 init.el），也可以站在巨人的肩
+  膀上（安装 package）。已经有许多人写了各种各样的 package，你可以安装它，来使得
+  Emacs 更加好用。[[http://www.melpa.org/][Melpa]] 上列了许多 package，每个 package 都有简单的说明和源代码
+  链接。找到需要的 package，然后安装即可。
+
+  把下面的代码放进你的配置(init.el)里。有的时候 package 下载的时候需要翻墙的，这
+  里使用的是子龙山人做的镜像，体验会更好。
+  #+begin_src emacs-lisp
+  (require 'package)
+  (setq package-archives '(("gnu"   . "http://elpa.emacs-china.org/gnu/")
+                           ("melpa" . "http://elpa.emacs-china.org/melpa/")))
+  (package-initialize)
+  #+end_src
+  重启 Emacs，运行命令： ~M-x package-list-package~; ~M-x package-refresh-contents~;
+  ~C-s NAME~ （你需要安装的 package 名字），找到后用鼠标点击，安装即可。
+  或者 ~M-x package-install RET NAME(package) RET~
+
+  还有一种方法比较新颖，也很方便：使用 use-package（也是一个 package）
+  在上面的代码后面加上如下代码即可：
+
+  #+begin_src emacs-lisp
+  ;; Install use-package
+  (unless (package-installed-p 'use-package)
+  (package-refresh-contents)
+  (package-install 'use-package))
+  ;; Automatically install package, such as chinese-fonts-setup
+  (use-package chinese-fonts-setup
+  :ensure t
+  :config
+  ;; 让 chinese-fonts-setup 随着 emacs 自动生效。
+  (chinese-fonts-setup-enable)
+  ;; 让 spacemacs mode-line 中的 Unicode 图标正确显示。
+  (cfs-set-spacemacs-fallback-fonts))
+  #+end_src
+  建议每个人都安装这个 package，或者通过网络上的其它方法来设置中英文字体，否则
+  Emacs 会很卡。
+
+* 使用 =Aspell= 来检查拼写
+  在 Windows 平台，可以使用 Aspell 等程序来实现对 Emacs 中 org 文件内容检查拼写。
+  配置也很简单，而且依然可以便携，因为安装好的 Aspell 程序是便携的（可以直接拷贝
+  它的安装文件，放在优盘里），Emacs 只要调用它就可以了。我会把我使用的 Aspell 程
+  序压缩后放在群文件里。安装 =flyspell-correct= 后，添加下面的代码即可：
+  #+begin_src emacs-lisp
+    (add-to-list 'exec-path (concat Files "Misc/Aspell/bin/"))
+    (setq ispell-program-name "aspell")
+    (setq ispell-process-directory (concat Files "Misc/Aspell/"))
+    (require 'flyspell-correct-ido)
+    (setq flyspell-correct-interface #'flyspell-correct-ido)
+  #+end_src
+  具体 flyspell-correct 的使用见它的 README
+
+* 如何使用大牛的配置
+  强烈推荐使用 [[https://github.com/redguardtoo/emacs.d][陈斌的配置]] 或者是  [[https://github.com/syl20bnr/spacemacs/tree/develop][Spacemacs]] 。 [[https://github.com/zilongshanren/spacemacs-private][子龙山人的配置]] 是私人定制的，使用
+  Spacemacs 的用户建议把他的配置下载下来看看代码，会对自己配置 Spacemacs 有很好
+  的借鉴。
+
+** 如何使用 [[http://spacemacs.org][Spacemacs]]
+   直接下载 [[https://github.com/syl20bnr/spacemacs/tree/develop][Spacemacs]] 的 [[https://github.com/syl20bnr/spacemacs/archive/develop.zip][Zip]] 文件，然后放到 HOME/.emacs.d/下面即可。按照说明进行操作即可。如
+   果出现错误可能是墙的原因，请添加下面的代码到 HOME 目录下.spacemacs 文件里
+   =dotspacemacs/user-init= 部分
+
+   #+begin_src emacs-lisp
+     (setq configuration-layer--elpa-archives
+           '(("melpa-cn" . "http://elpa.emacs-china.org/melpa/")
+             ("org-cn"   . "http://elpa.emacs-china.org/org/")
+             ("gnu-cn"   . "http://elpa.emacs-china.org/gnu/")))
+   #+end_src
+   然后重启。
+
+** Spacemacs FAQ
+*** Common
+  鉴于很多同学都是从 Spacemacs 直接开始上手 Emacs，这里提供了一些对于常见问题的
+  解答。（主要是从 Spacemacs 的官方文档翻译过来的。对于英语没问题的同学可以直接
+  在 Spacemacs 内按 ~SPC h SPC~ =helm-spacemacs-help= 查看文档。 ）
+
+**** 为什么我自己安装的插件在启动时被删除了呢？
+   默认情况下 Spacemacs 只会保留在 Layer 中使用到的 Package（即插件）。你需要自
+   己写一个 Layer 来安装它。
+
+   - 要安装一个不属于任何 Layer 的 Package，你可以把它加入
+     =dotspacemacs-additional-packages= 。
+   - 或者在配置文件中把 =dotspacemacs-install-packages= 设置成
+     =used-but-keep-unused= 。这样 Sapcemacs 就不会删除你的任何插件。
+
+**** 下载插件过程中一直出错，怎么办？
+   如果你在国内，可以使用 emasc-china 的镜像，[[https://elpa.emacs-china.org][这里]] 有具体方法。请确保你所在的公
+   司／学校允许连接到镜像网站。同时你可能需要确保能够从 github 下载，因为有一部
+   分插件使用的是 github 而不是 elpa 源，必要时可以开代理。如果你没有办法用
+   https，请把 =dotspacemacs-elpa-https= 设置成 =nil= 。
+
+   然后，多重启几次就可以了。
+
+**** 状态栏的分界符有些奇怪
+   设置 =dotspacemacs-default-font= 里面的 =:powerline-scale= 。
+
+**** 个人配置该放到哪里？ =user-init= 还是 =user-config=
+   除非你知道这配置怎么起作用，或者在 =user-config= 里不起作用，不然就加到
+   =user-init= 里面去。
+
+*** 如何：
+**** 安装现有 Layer 没有提供的 package?
+     在.spacemacs 配置文件里， =dotspacemacs-additional-packages= 下添加所需
+     package 名字即可。使用 ~SPC f e R~ 重新加载配置或者重启 Emacs 都会自动安装
+     package。
+
+**** 禁用某个 package?
+     即使一个 package 存在于你 layer 里面，你也可以卸载这个 package，只需要把 package
+     的名字加进配置中的变量 =dotspacemacs-excluded-packages= 里面即可。
+
+     #+BEGIN_SRC emacs-lisp
+     (setq-default dotspacemacs-excluded-packages '(package1 package2 ...))
+     #+END_SRC
+
+**** 在选定的 Major-mode 里面禁用某个 package？
+     可以通过移除 hook 来实现这个功能。例如：在 python 的模式中禁用 flycheck，只
+     需要在配置中 =dotspacemacs/user-config= 添加如下代码即可：
+
+     #+BEGIN_SRC emacs-lisp
+     (remove-hook 'python-mode-hook 'flycheck-mode)
+     #+END_SRC
+
+     提示： ~SPC h d v major-mode RET~ 即可查看当前 buffer 的 major-mode
+
+**** 在特定的 major-mode 中禁用自动补全 company？
+     你可以很容易的禁用掉 =company= ，而自己去配置 =auto-complete= . 可以在
+     spacemacs 的配置文件中 =dotspacemacs/user-config= 函数下添加宏
+     =spacemacs|disable-company=来实现。下面是在 =python-mode= 中禁用 =company=
+     的代码：
+     #+BEGIN_SRC emacs-lisp
+     (spacemacs|disable-company python-mode)
+     #+END_SRC
+
+**** 直接启用 vim 的 vitual line 移动？
+     在 =dotspacemacs/user-config= 函数下添加以下代码即可：
+
+     #+BEGIN_SRC emacs-lisp
+       ;; Make evil-mode up/down operate in screen lines instead of logical lines
+       (define-key evil-motion-state-map "j" 'evil-next-visual-line)
+       (define-key evil-motion-state-map "k" 'evil-previous-visual-line)
+       ;; Also in visual mode
+       (define-key evil-visual-state-map "j" 'evil-next-visual-line)
+       (define-key evil-visual-state-map "k" 'evil-previous-visual-line)
+     #+END_SRC
+
+**** 禁用某个 mode 的 evil 状态
+     可以使用 =evil-set-initial-state= 来定义某个 mode 下打开时的初始状态（evil
+     模式或者 Emacs 模式）：
+
+     #+BEGIN_SRC emacs-lisp
+     (evil-set-initial-state 'magit-status-mode 'emacs)
+     #+END_SRC
+
+     也可以通过使用 buffer 名字的正则表达式来实现。
+
+**** 设置 =$PATH= (Emacs 调用程序的路径)
+     当软件没有安装在 Emacs 的默认路径(exec-path)时，需要加入程序的安装路径，以
+     便 Emacs 来调用它。可以在 =dotspacemacs/user-config= 中添加如下代码（可以添
+     加多行类似代码来调用外部程序）：
+     #+BEGIN_SRC emacs-lisp
+     (add-to-list 'exec-path "~/.local/bin/")
+     #+END_SRC
+
+**** 防止选择文本占用系统剪贴板？
+     在一些系统中，只有一个剪贴板来存放 复制 和 选择 的文本，这会导致 Emacs 中
+     选择 的文本占用系统剪贴板。在 =dotspacemacs/user-config= 中来修正：
+
+     #+BEGIN_SRC emacs-lisp
+     (fset 'evil-visual-update-x-selection 'ignore)
+     #+END_SRC
+
+**** 使用 Spacemacs 作为 Git 提交信息的编辑器
+     只需要在 =dotspacemacs/user-config= 中加上：
+
+     #+BEGIN_SRC emacs-lisp
+     (global-git-commit-mode t)
+     #+END_SRC
+
+**** 在 X11 终端下，使用鼠标来复制/粘贴
+     在 =dotspacemacs/user-config= 中添加如下代码：
+
+     #+begin_src emacs-lisp
+     (xterm-mouse-mode -1)
+     #+end_src
+
+**** 重映射粘贴键使其能够多次粘贴复制过的文本？
+     在 vim 和 evil 模式下，在选中的文本上粘贴复制的文本会导致被替换的文本放在剪
+     贴板，导致不能连续多次粘贴复制的文本。可以使用下面的代码来修正：
+
+     #+BEGIN_SRC emacs-lisp
+       (defun evil-paste-after-from-0 ()
+         (interactive)
+         (let ((evil-this-register ?0))
+           (call-interactively 'evil-paste-after)))
+
+       (define-key evil-visual-state-map "p" 'evil-paste-after-from-0)
+     #+END_SRC
+
+*** Windows
+**** 为什么字体很难看？
+     你可以装 [[https://code.google.com/archive/p/gdipp/][GDIPP]] （轻量）或者 [[https://code.google.com/p/mactype/][MacType]] （重量）来显示漂亮的平滑字体。
+     同时建议你把 =dotspacemacs-smooth-scrolling= 设置为 =nil= 。
+
+**** 如何让 Emacs 显示图片、收邮件、上 IRC？
+     要做到这些，你需要安装额外的依赖包。
+     1. 前往最近的 Emacs 镜像站，比如
+        http://mirrors.ustc.edu.cn/gnu/emacs/windows/。
+     2. 找到如下两个压缩文件：
+     #+begin_example
+        emacs-25-i686-deps.zip
+        emacs-25-x86_64-deps.zip
+     #+end_example
+     4. 如果你用的是 32 位系统，下前一个，反之 64 位系统用户下载后一个。
+     5. 解压到 Emacs 文件夹即可。
+     6. 或者解压 bin 文件夹里的内容到 Emacs/bin 文件夹（也就是 Emacs.exe 所在的
+        那个），启动 Emacs。完成！
+
+**** 为什么 Spacemacs Logo 图片不显示？
+     见上一问。
+
+**** 为什么有的插件无法安装？
+     可能是缺少 GnuTLS，按 =M-:= （Alt 键+Shift 键+;键），输入：
+     #+begin_src emacs-lisp
+     (gnutls-available-p)
+     #+end_src
+     回车。 如果返回值是 =nil= ，你需要安装额外的依赖包。
+
+     解决方法同上一问。
+
+** 如何使用子龙山人的配置
+   直接下载 Spacemacs 的 zip 文件，解压到 HOME/.emacs.d/下面。
+   然后下载 [[https://github.com/zilongshanren/spacemacs-private][子龙山人]] 的 [[https://github.com/zilongshanren/spacemacs-private/archive/develop.zip][配置文件]] ，解压到 HOME/.spacemacs.d/下面
+   然后运行 runemacs.exe。
+
+** 如何使用陈斌的配置
+   他的 [[https://github.com/redguardtoo/emacs.d][github]] 上面详细说明了他的配置安装方法。
+
+* 待补充（尽管提意见）……
+
+  #+begin_quote 
+  不过在没有一年的修炼之前 千万不要猜 Emacs 不能做什么... 重点是头脑灵活,既坚信
+  Emacs 无所不能，也适当变通 -- 陈斌
+  #+end_quote
