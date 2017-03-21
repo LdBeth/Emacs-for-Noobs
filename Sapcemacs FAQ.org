@@ -1,0 +1,188 @@
+#+TITLE: Spacemacs FAQ
+#+AUTHOR: LdBeth & Zhixing
+#+STARTUP: showall
+
+* 目录                                                                  :TOC:
+ - [[#介绍][介绍]]
+ - [[#常见问题][常见问题]]
+   - [[#为什么我自己安装的插件在启动时被删除了呢][为什么我自己安装的插件在启动时被删除了呢？]]
+   - [[#下载插件过程中一直出错怎么办][下载插件过程中一直出错，怎么办？]]
+   - [[#状态栏的分界符有些奇怪][状态栏的分界符有些奇怪]]
+   - [[#个人配置该放到哪里-user-init-还是-user-config][个人配置该放到哪里？ =user-init= 还是 =user-config=]]
+ - [[#如何][如何：]]
+   - [[#安装现有-layer-没有提供的-package][安装现有 Layer 没有提供的 package?]]
+   - [[#禁用某个-package][禁用某个 package?]]
+   - [[#在选定的-major-mode-里面禁用某个-package][在选定的 Major-mode 里面禁用某个 package？]]
+   - [[#在特定的-major-mode-中禁用自动补全-company][在特定的 major-mode 中禁用自动补全 company？]]
+   - [[#直接启用-vim-的-vitual-line-移动][直接启用 vim 的 vitual line 移动？]]
+   - [[#禁用某个-mode-的-evil-状态][禁用某个 mode 的 evil 状态]]
+   - [[#设置-path-emacs-调用程序的路径][设置 =$PATH= (Emacs 调用程序的路径)]]
+   - [[#防止选择文本占用系统剪贴板][防止选择文本占用系统剪贴板？]]
+   - [[#使用-spacemacs-作为-git-提交信息的编辑器][使用 Spacemacs 作为 Git 提交信息的编辑器]]
+   - [[#在-x11-终端下使用鼠标来复制粘贴][在 X11 终端下，使用鼠标来复制/粘贴]]
+   - [[#重映射粘贴键使其能够多次粘贴复制过的文本][重映射粘贴键使其能够多次粘贴复制过的文本？]]
+ - [[#windows][Windows]]
+       - [[#为什么字体很难看][为什么字体很难看？]]
+       - [[#如何让-emacs-显示图片收邮件上-irc][如何让 Emacs 显示图片、收邮件、上 IRC？]]
+       - [[#为什么-spacemacs-logo-图片不显示][为什么 Spacemacs Logo 图片不显示？]]
+       - [[#为什么有的插件无法安装][为什么有的插件无法安装？]]
+
+* 介绍
+  鉴于很多同学都是从 Spacemacs 直接开始上手 Emacs，这里提供了一些对于常见问题的
+  解答。（主要是从 Spacemacs 的官方文档翻译过来的。对于英语没问题的同学可以直接
+  在 Spacemacs 内按 ~SPC h SPC~ =helm-spacemacs-help= 查看文档。 ）
+
+* 常见问题
+** 为什么我自己安装的插件在启动时被删除了呢？
+   默认情况下 Spacemacs 只会保留在 Layer 中使用到的 Package（即插件）。你需要自
+   己写一个 Layer 来安装它。
+
+   - 要安装一个不属于任何 Layer 的 Package，你可以把它加入
+     =dotspacemacs-additional-packages= 。
+   - 或者在配置文件中把 =dotspacemacs-install-packages= 设置成
+     =used-but-keep-unused= 。这样 Sapcemacs 就不会删除你的任何插件。
+
+** 下载插件过程中一直出错，怎么办？
+    如果你在国内，可以使用 emasc-china 的镜像，[[https://elpa.emacs-china.org][这里]] 有具体方法。请确保你所在的公
+    司／学校允许连接到镜像网站。同时你可能需要确保能够从 github 下载，因为有一部
+    分插件使用的是 github 而不是 elpa 源，必要时可以开代理。如果你没有办法用
+    https，请把 =dotspacemacs-elpa-https= 设置成 =nil= 。
+
+    然后，多重启几次就可以了。
+
+** 状态栏的分界符有些奇怪
+    设置 =dotspacemacs-default-font= 里面的 =:powerline-scale= 。
+
+** 个人配置该放到哪里？ =user-init= 还是 =user-config=
+    除非你知道这配置怎么起作用，或者在 =user-config= 里不起作用，不然就加到
+    =user-init= 里面去。
+
+* 如何：
+** 安装现有 Layer 没有提供的 package?
+    在.spacemacs 配置文件里， =dotspacemacs-additional-packages= 下添加所需
+    package 名字即可。使用 ~SPC f e R~ 重新加载配置或者重启 Emacs 都会自动安装
+    package。
+
+** 禁用某个 package?
+    即使一个 package 存在于你 layer 里面，你也可以卸载这个 package，只需要把 package
+    的名字加进配置中的变量 =dotspacemacs-excluded-packages= 里面即可。
+
+    #+BEGIN_SRC emacs-lisp
+     (setq-default dotspacemacs-excluded-packages '(package1 package2 ...))
+    #+END_SRC
+
+** 在选定的 Major-mode 里面禁用某个 package？
+    可以通过移除 hook 来实现这个功能。例如：在 python 的模式中禁用 flycheck，只
+    需要在配置中 =dotspacemacs/user-config= 添加如下代码即可：
+
+    #+BEGIN_SRC emacs-lisp
+     (remove-hook 'python-mode-hook 'flycheck-mode)
+    #+END_SRC
+
+    提示： ~SPC h d v major-mode RET~ 即可查看当前 buffer 的 major-mode
+
+
+** 在特定的 major-mode 中禁用自动补全 company？
+    你可以很容易的禁用掉 =company= ，而自己去配置 =auto-complete= . 可以在
+    spacemacs 的配置文件中 =dotspacemacs/user-config= 函数下添加宏
+    =spacemacs|disable-company=来实现。下面是在 =python-mode= 中禁用 =company=
+    的代码：
+    #+BEGIN_SRC emacs-lisp
+     (spacemacs|disable-company python-mode)
+    #+END_SRC
+
+** 直接启用 vim 的 vitual line 移动？
+    在 =dotspacemacs/user-config= 函数下添加以下代码即可：
+
+    #+BEGIN_SRC emacs-lisp
+       ;; Make evil-mode up/down operate in screen lines instead of logical lines
+       (define-key evil-motion-state-map "j" 'evil-next-visual-line)
+       (define-key evil-motion-state-map "k" 'evil-previous-visual-line)
+       ;; Also in visual mode
+       (define-key evil-visual-state-map "j" 'evil-next-visual-line)
+       (define-key evil-visual-state-map "k" 'evil-previous-visual-line)
+    #+END_SRC
+
+** 禁用某个 mode 的 evil 状态
+    可以使用 =evil-set-initial-state= 来定义某个 mode 下打开时的初始状态（evil
+    模式或者 Emacs 模式）：
+
+    #+BEGIN_SRC emacs-lisp
+     (evil-set-initial-state 'magit-status-mode 'emacs)
+    #+END_SRC
+
+    也可以通过使用 buffer 名字的正则表达式来实现。
+
+** 设置 =$PATH= (Emacs 调用程序的路径)
+    当软件没有安装在 Emacs 的默认路径(exec-path)时，需要加入程序的安装路径，以
+    便 Emacs 来调用它。可以在 =dotspacemacs/user-config= 中添加如下代码（可以添
+    加多行类似代码来调用外部程序）：
+    #+BEGIN_SRC emacs-lisp
+     (add-to-list 'exec-path "~/.local/bin/")
+    #+END_SRC
+
+** 防止选择文本占用系统剪贴板？
+    在一些系统中，只有一个剪贴板来存放 复制 和 选择 的文本，这会导致 Emacs 中
+    选择 的文本占用系统剪贴板。在 =dotspacemacs/user-config= 中来修正：
+
+    #+BEGIN_SRC emacs-lisp
+     (fset 'evil-visual-update-x-selection 'ignore)
+    #+END_SRC
+
+** 使用 Spacemacs 作为 Git 提交信息的编辑器
+    只需要在 =dotspacemacs/user-config= 中加上：
+
+    #+BEGIN_SRC emacs-lisp
+     (global-git-commit-mode t)
+    #+END_SRC
+
+** 在 X11 终端下，使用鼠标来复制/粘贴
+    在 =dotspacemacs/user-config= 中添加如下代码：
+
+    #+begin_src emacs-lisp
+     (xterm-mouse-mode -1)
+    #+end_src
+
+** 重映射粘贴键使其能够多次粘贴复制过的文本？
+    在 vim 和 evil 模式下，在选中的文本上粘贴复制的文本会导致被替换的文本放在剪
+    贴板，导致不能连续多次粘贴复制的文本。可以使用下面的代码来修正：
+
+    #+BEGIN_SRC emacs-lisp
+       (defun evil-paste-after-from-0 ()
+         (interactive)
+         (let ((evil-this-register ?0))
+           (call-interactively 'evil-paste-after)))
+
+       (define-key evil-visual-state-map "p" 'evil-paste-after-from-0)
+    #+END_SRC
+
+* Windows
+**** 为什么字体很难看？
+     你可以装 [[https://code.google.com/archive/p/gdipp/][GDIPP]] （轻量）或者 [[https://code.google.com/p/mactype/][MacType]] （重量）来显示漂亮的平滑字体。
+     同时建议你把 =dotspacemacs-smooth-scrolling= 设置为 =nil= 。
+
+**** 如何让 Emacs 显示图片、收邮件、上 IRC？
+     要做到这些，你需要安装额外的依赖包。
+     1. 前往最近的 Emacs 镜像站，比如
+        http://mirrors.ustc.edu.cn/gnu/emacs/windows/。
+     2. 找到如下两个压缩文件：
+     #+begin_example
+        emacs-25-i686-deps.zip
+        emacs-25-x86_64-deps.zip
+     #+end_example
+     4. 如果你用的是 32 位系统，下前一个，反之 64 位系统用户下载后一个。
+     5. 解压到 Emacs 文件夹即可。
+     6. 或者解压 bin 文件夹里的内容到 Emacs/bin 文件夹（也就是 Emacs.exe 所在的
+        那个），启动 Emacs。完成！
+
+**** 为什么 Spacemacs Logo 图片不显示？
+     见上一问。
+
+**** 为什么有的插件无法安装？
+     可能是缺少 GnuTLS，按 =M-:= （Alt 键+Shift 键+;键），输入：
+     #+begin_src emacs-lisp
+     (gnutls-available-p)
+     #+end_src
+     回车。 如果返回值是 =nil= ，你需要安装额外的依赖包。
+
+     解决方法同上一问。
