@@ -1,0 +1,33 @@
+* Emacs-on-Windows-for-Noobs
+  :PROPERTIES:
+  :CUSTOM_ID: emacs-on-windows-for-noobs
+  :END:
+
+新手指南
+
+[[http://spacemacs.org][[[https://cdn.rawgit.com/syl20bnr/spacemacs/442d025779da2f62fc86c2082703697714db6514/assets/spacemacs-badge.svg]]]]
+
+时常更新
+
+** Windows平台Emacs新手入门QQ群
+   :PROPERTIES:
+   :CUSTOM_ID: windows平台emacs新手入门qq群
+   :END:
+
+群号：623122498 点击链接加入群【Emacs on
+Windows入门】：https://jq.qq.com/?\_wv=1027&k=46CEVpJ
+
+** TODO
+   :PROPERTIES:
+   :CUSTOM_ID: todo
+   :END:
+
+*** Gnus & Mew
+    :PROPERTIES:
+    :CUSTOM_ID: gnus-mew
+    :END:
+
+*** Eshell
+    :PROPERTIES:
+    :CUSTOM_ID: eshell
+    :END:
