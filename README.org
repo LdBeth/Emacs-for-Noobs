@@ -14,7 +14,7 @@
    :CUSTOM_ID: windows平台emacs新手入门qq群
    :END:
 
-群号：623122498 点击链接加入群【Emacs on
+群号： =623122498= 点击链接加入群【Emacs on
 Windows入门】：https://jq.qq.com/?\_wv=1027&k=46CEVpJ
 
 ** TODO
@@ -31,3 +31,4 @@ Windows入门】：https://jq.qq.com/?\_wv=1027&k=46CEVpJ
     :PROPERTIES:
     :CUSTOM_ID: eshell
     :END:
+    

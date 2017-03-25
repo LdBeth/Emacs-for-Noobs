@@ -9,9 +9,9 @@
    - [[#spacemacs-rocks-from-子龙山人][Spacemacs-rocks from 子龙山人]]
    - [[#emacs-中文论坛][Emacs 中文论坛]]
    - [[#planet-emacsen][Planet Emacsen]]
- - [[#emacs-on-windows-下载][=Emacs on Windows= 下载]]
+ - [[#emacs-on-windows-下载与图片支持][=Emacs on Windows= 下载与图片支持]]
  - [[#emacs-on-windows-启动][=Emacs on Windows= 启动]]
- - [[#设置-home-目录][设置 =HOME= 目录]]
+ - [[#设置-home-目录与-portable-emacs][设置 =HOME= 目录与 =Portable Emacs=]]
  - [[#对-emacs-进行简单配置][对 =Emacs= 进行简单配置]]
  - [[#安装-package][安装 =package=]]
  - [[#使用-aspell-来检查拼写][使用 =Aspell= 来检查拼写]]
@@ -43,12 +43,14 @@
 ** [[http://planet.emacsen.org][Planet Emacsen]]
    学习 Lisp 有成以后可以来这里找些小众技巧，锻练英语阅读。
 
-* =Emacs on Windows= 下载
+* =Emacs on Windows= 下载与图片支持
   直接从[[https://www.gnu.org/software/emacs/][官网]] 下载是比较好的，选择一个临近的站点，直接下载即可。在下载页面都有官
-  方的文件说明。 =emacs-n-x86_64-w64-mingw32.zip (64 bit)= and
-  =emacs-n-i686-w64-mingw32.zip (32 bit)= 下载后直接解压即可。还有相对应的支持包
-  =emacs-n-x-deps.zip= , 把里面的文件复制进上面解压后的文件夹里，直接提供了图片
-  的 dll 文件支持。
+  方的文件说明。官网现在提供Emacs25.1的软件包和支持包：
+  =emacs-n-x86_64-w64-mingw32.zip (64 bit)= and =emacs-n-i686-w64-mingw32.zip (32
+  bit)= 下载后直接解压即可。还有相对应的支持包=emacs-n-x-deps.zip= , 把里面的文件复
+  制进上面解压后的文件夹里，直接提供了图片的 dll 文件支持。在前面的版本(如
+  Emacs24.5)里，下载后的软件里 =\share\emacs\24.5\= 文件夹下的README文件里可以找到
+  支持图片的dll文件下载地址。
 
 * =Emacs on Windows= 启动
   解压后的文件里有四个文件夹：bin，libexec，share，var。直接运行 bin 文件夹里的
@@ -59,7 +61,7 @@
   没有必要。在 Windows 平台上建议直接设定 Emacs 的工作目录：
   share/emacs/site-lisp/subdirs.el 里面设定它的工作目录即可。
 
-* 设置 =HOME= 目录
+* 设置 =HOME= 目录与 =Portable Emacs= 
   可以参考[[https://emacs-china.org/t/windows-emacs/797/11][在 windows 平台将 emacs 绿色化的方法]]。下面说一下我配置：
 
   我的目录结构：
@@ -75,18 +77,18 @@
   编辑文件 C:/TC/Software/Emacs/Emacs-64bit/share/emacs/site-lisp/subdirs.el
 
   #+begin_src emacs-lisp
-  ;; 原有代码不动
-  (if (fboundp 'normal-top-level-add-subdirs-to-load-path)
-  (normal-top-level-add-subdirs-to-load-path))
-  ;; 下面是增加的代码
-  ;; 设定变量 =Emacs= path: =C:/TC/Software/Emacs/=
-  (defvar Emacs (replace-regexp-in-string "Emacs.*/$" "Emacs/" data-directory :from-end)) ;; 去掉路径中 Emacs 后面的部分
-  ;; 设定 HOME 目录
-  (setenv "HOME" (concat Emacs "Home-spacemacs/"))
+    ;; 原有代码不动
+    (if (fboundp 'normal-top-level-add-subdirs-to-load-path)
+    (normal-top-level-add-subdirs-to-load-path))
+    ;; 下面是增加的代码
+    ;; 设定变量 =Emacs= path: =C:/TC/Software/Emacs/=
+    ;; 去掉路径中Emacs后面的部分设定HOME目录
+    (defvar Emacs (replace-regexp-in-string "Emacs.*/$" "Emacs/" data-directory :from-end)) 
+    (setenv "HOME" (concat Emacs "Home-spacemacs/"))
 
-  ;; 可以直接设定 HOME 目录
-  (setenv "HOME" "C:/TC/Software/Emacs/Home")
-  ;; 上面的 home 和 home-spacemacs 用来存放两份不同的配置。
+    ;; 可以直接设定 HOME 目录
+    (setenv "HOME" "C:/TC/Software/Emacs/Home")
+    ;; 上面的 home 和 home-spacemacs 用来存放两份不同的配置。
   #+end_src
 
   如果你想把它放在优盘里，可以这样设置：
@@ -97,7 +99,7 @@
 
 * 对 =Emacs= 进行简单配置
   HOME 目录怎么存放配置呢？打开 Emacs， ~C-x C-f~ 输入 =~/.emacs.d/init.el= 或者
-  =~/.emacs=提示是否要新建文件，yes 就可以了（我主要用 init.el，后面提到配置文件
+  =~/.emacs= 提示是否要新建文件，yes 就可以了（我主要用 init.el，后面提到配置文件
   也是指这个文件，这两个文件没有区别）。然后输入配置（举例）：
 
   #+begin_src emacs-lisp
@@ -132,16 +134,16 @@
   #+begin_src emacs-lisp
   ;; Install use-package
   (unless (package-installed-p 'use-package)
-  (package-refresh-contents)
-  (package-install 'use-package))
+          (package-refresh-contents)
+          (package-install 'use-package))
   ;; Automatically install package, such as chinese-fonts-setup
   (use-package chinese-fonts-setup
-  :ensure t
-  :config
-  ;; 让 chinese-fonts-setup 随着 emacs 自动生效。
-  (chinese-fonts-setup-enable)
-  ;; 让 spacemacs mode-line 中的 Unicode 图标正确显示。
-  (cfs-set-spacemacs-fallback-fonts))
+       :ensure t
+       :config
+       ;; 让 chinese-fonts-setup 随着 emacs 自动生效。
+       (chinese-fonts-setup-enable)
+       ;; 让 spacemacs mode-line 中的 Unicode 图标正确显示。
+       (cfs-set-spacemacs-fallback-fonts))
   #+end_src
   建议每个人都安装这个 package，或者通过网络上的其它方法来设置中英文字体，否则
   Emacs 会很卡。
@@ -171,14 +173,13 @@
    =dotspacemacs/user-init= 部分
 
    #+begin_src emacs-lisp
-     (setq configuration-layer--elpa-archives
-           '(("melpa-cn" . "http://elpa.emacs-china.org/melpa/")
-             ("org-cn"   . "http://elpa.emacs-china.org/org/")
-             ("gnu-cn"   . "http://elpa.emacs-china.org/gnu/")))
+   (setq configuration-layer--elpa-archives
+         '(("melpa-cn" . "http://elpa.emacs-china.org/melpa/")
+           ("org-cn"   . "http://elpa.emacs-china.org/org/")
+           ("gnu-cn"   . "http://elpa.emacs-china.org/gnu/")))
    #+end_src
    然后重启。
 
-   详见 FAQ。
 
 ** 如何使用子龙山人的配置
    直接下载 Spacemacs 的 zip 文件，解压到 HOME/.emacs.d/下面。
