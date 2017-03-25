@@ -1,0 +1,198 @@
+#+TITLE: Mail in Emacs World
+#+AUTHOR: Ldbeth
+#+STARTUP: showall
+
+本文内容节选自 Emacs 中文化指南 以及 Mew 使用手册等资料。主要针对 Windows 用户。因为在
+BSD 或 Linux 上我更推荐用 notmuch。
+
+* 目录                                                                  :TOC:
+ - [[#为什么使用-mew][为什么使用 Mew？]]
+ - [[#开始安装][开始安装]]
+ - [[#使用][使用]]
+ - [[#一些高级技巧][一些“高级”技巧]]
+   - [[#多个邮箱][多个邮箱]]
+   - [[#自动输入密码][自动输入密码]]
+ - [[#待续][待续]]
+
+* 为什么使用 Mew？
+  1. Mew 是由日本人编写的，对中文支持不错。
+  2. 用外部可执行文件收信，比 Gnus 快。而且 Gnus 的默认配置不适合看邮件。
+  3. 可以在 Windows 上使用。不像 mu4e 或者 notmuch 需要其它工具来负责收发信件。
+  4. 邮件分类功能很强（其实我没认真用过）。
+  5. 老牌软件。
+
+* 开始安装
+  1. 从 [[http://www.mew.org/en/][官网]] 下载打包好的文件。把 exe 文件放在 =/bin= 文件夹里。把 el 文件放在
+     =load-path= 里。
+  2. 在 [[http://www.stunnel.org/downloads.html?extra=/binaries.html][这里]] 下载并安装 stunnel，记得再下个 openSSL。如果你不需要SSL的话跳过这步
+     也没关系。
+  3. 配置参考：
+     #+begin_src emacs-lisp
+       ;;==== .init.el =====
+       (autoload 'mew "mew" nil t)
+       (autoload 'mew-send "mew" nil t)
+
+       ;; Optional setup (Read Mail menu for Emacs 21):
+       (if (boundp 'read-mail-command)
+           (setq read-mail-command 'mew))
+
+       ;; Optional setup (e.g. C-xm for sending a message):
+       (autoload 'mew-user-agent-compose "mew" nil t)
+       (if (boundp 'mail-user-agent)
+           (setq mail-user-agent 'mew-user-agent))
+       (if (fboundp 'define-mail-user-agent)
+           (define-mail-user-agent
+             'mew-user-agent
+             'mew-user-agent-compose
+             'mew-draft-send-message
+             'mew-draft-kill
+             'mew-send-hook))
+       (setq mew-pop-delete nil)
+       (setq user-full-name "xxxx")
+       (setq user-mail-address "xxxx@gmail.com")
+       (setq mew-cite-fields '("Date:"  "From:"))
+       (setq mew-cite-format "On %s %s wrote:\n\n")
+
+       ;;==== .mew.el ====
+       (setq mew-prog-ssl "C:/Program Files/stunnel/stunnel.exe");改为你安装的路径
+       (setq mew-ssl-verify-level 0)
+       (setq mew-user "xxxx")
+       (setq mew-mail-domain "gmail.com")
+       (setq mew-pop-user "xxxx@gmail.com")
+       (setq mew-pop-auth 'pass)
+       (setq mew-pop-ssl t)
+       (setq mew-pop-delete nil)
+       (setq mew-pop-server "pop.gmail.com")
+       (setq mew-pop-ssl-port "995")
+       (setq mew-smtp-user "gutianhit@gmail.com")
+       (setq mew-smtp-ssl t)
+       (setq mew-smtp-server "smtp.gmail.com")
+       (setq mew-smtp-ssl-port "465")
+     #+end_src
+
+* 使用
+  这里给出一些常用命令。
+
+  | 按键                | 命令                                           |
+  |---------------------+------------------------------------------------|
+  | W                   | 撰写新邮件                                     |
+  | a                   | 回复邮件，不带引用                             |
+  | A	                 | 回复邮件，带引用                               |
+  | r	                 | 重新发送邮件                                   |
+  | f	                 | 转发邮件                                       |
+  | SPC(空格)           | 	阅读邮件                                     |
+  | y                   | 	保存文件（可以保存信件全文，信件正文，附件） |
+  | C-c C-l             | 	转换当前邮件的编码格式                       |
+  | C-c C-a             | 	加入地址薄                                   |
+  | C-u C-c C-a         | 	比 C-c C-a 多加入昵称和名字                  |
+  | C-c C-q             | 	不保存退出                                   |
+  | C-c C-a	           | 准备插入附件                                   |
+  | mew-attach-copy     | 	用复制方式加入附件                           |
+  | mew-attach-link	   | 用链接方式加入附件                             |
+  | mew-attach-delete	 | 删除附件                                       |
+  | C-c C-c             | 	发送邮件                                     |
+  | C-c RET(回车)       | 	保存邮件到发送队列                           |
+  | C                   | 	如果设置了多个邮箱，用 C 命令切换            |
+  | Q                   | 	退出Mew                                      |
+
+* 一些“高级”技巧
+** 多个邮箱
+   #+begin_src emacs-lisp
+     ;;    需要注意， =mailbox-type= 和 =pop-auth= 设置的值是没有引号的
+     (setq mew-config-alist
+           '(("yahoo"
+              ("name"         .  "Jerry")
+              ("user"         .  "myname")
+              ("smtp-server"  .  "127.0.0.1")
+              ("smtp-port"    .  "5059")
+              ("pop-server"   .  "127.0.0.1")
+              ("pop-port"     .  "5058")
+              ("smtp-user"    .  "myname")
+              ("pop-user"     .  "myname")
+              ("mail-domain"  .  "nonexist.com")
+              ("mailbox-type" .  pop)
+              ("pop-auth"     .  pass)
+              ("smtp-auth-list" . ("PLAIN" "LOGIN" "CRAM-MD5"))
+              )
+             ("default"
+              ("name"         .  "Jerry")
+              ("user"         .  "sample")
+              ("smtp-server"  .  "127.0.0.1")
+              ("smtp-port"    .  "25")
+              ("pop-server"   .  "127.0.0.1")
+              ("pop-port"     .  "110")
+              ("smtp-user"    .  "sample")
+              ("pop-user"     .  "sample")
+              ("mail-domain"  .  "sample.net")
+              ("mailbox-type" .  pop)
+              ("pop-auth"     .  pass)
+              ("smtp-auth-list" . ("PLAIN" "LOGIN" "CRAM-MD5"))
+              )))
+
+     ;; 另外一种格式。然而我没有配置成功过，你可以实验几次。:P
+     (setq mew-config-alist
+           '(
+             ;; Default fetch mailbox is IMAP
+             (default
+              (mailbox-type          imap)
+              (proto                 "%")
+              (imap-server           "imap.gmail.com")
+              (imap-user             "imapuser@gmail.com")
+              (name                  "User Mew")
+              (user                  "user")
+              (mail-domain           "gmail.com")
+              (imap-size             0)
+              (imap-delete           t)
+              (imap-queue-folder     "%queue")
+              (imap-trash-folder     "%Trash") ;; This must be in concile with your IMAP box setup
+              (smtp-auth-list        ("PLAIN" "LOGIN" "CRAM-MD5")) 
+              (smtp-user             "smtpuser@gmail.com")
+              (smtp-server           "smtp.gmail.com")
+
+              ;; news group comp.lang.c
+            (usenet
+             (mailbox-type         . mbox)
+             (proto                . -)
+             (nntp-server           "news.aioe.org")
+             (nntp-user             nil) ;; should be nil defaulty
+             (nntp-header-only      nil)
+             (nntp-newsgroup        "-comp.lang.c") ;; little '-'
+             (nntp-size             0)
+             (nntp-msgid-user       "User Mew")
+             (smtp-auth-list        ("PLAIN" "LOGIN" "CRAM-MD5"))
+             (smtp-user             "smtpuser@gmail.com")
+             (smtp-server           "smtp.gmail.com")
+
+             (mailinglist
+              (mailbox-type          pop)
+              (proto                 +)
+              (pop-server            "pop.gmail.com")
+              (name                  "User Mew")
+              (user                  "user")
+              (mail-domain           "gmail.com")
+              (pop-auth              pass)
+              (pop-user              "popuser@gmail.com")
+              (smtp-user             "smtpuser@gmail.com")
+              (smtp-server           "smtp.gmail.com")
+             ))
+   #+end_src
+   
+** 自动输入密码
+   比较让人无语的是，为了安全，Mew 没有提供设置密码的地方。顶多只能让你把密码储
+   存在缓存文件里。如果密码是一些容易记住的有规律的东西，倒也没什么大不了的。
+   然而某些邮箱只能允许通过把密码设置为随机生成的 token 来使用邮
+   件客户端登录。这时密码就是 jdsdos432aojdsads 之类的蛋疼玩意了。即使你能把缓存有效时间设置得
+
+   但是，通过一些奇技淫巧，你可以实现启动 Mew 时自动输入密码。
+   #+begin_src emacs-lisp
+     (add-hook 'mew-init-hook
+               (lambda ()
+                 (mew-passwd-set-passwd
+                  "john@foxmail.com@pop.qq.com:pop3"
+                  "disajdskadsjakld")))
+   #+end_src
+   
+   你应该可以看出来，前面一个 String 是 =邮箱账号@邮箱服务器地址:连接方式（pop3 或者 imap）= ，
+   后面一个就是密码了。
+   
+* 待续
