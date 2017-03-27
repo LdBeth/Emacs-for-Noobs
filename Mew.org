@@ -24,7 +24,7 @@ BSD 或 Linux 上我更推荐用 notmuch。
 * 开始安装
   1. 从 [[http://www.mew.org/en/][官网]] 下载打包好的文件。把 exe 文件放在 =/bin= 文件夹里。把 el 文件放在
      =load-path= 里。
-  2. 在 [[http://www.stunnel.org/downloads.html?extra=/binaries.html][这里]] 下载并安装 stunnel，记得再下个 openSSL。如果你不需要SSL的话跳过这步
+  2. 在 [[http://www.stunnel.org/downloads.html?extra=/binaries.html][这里]] 下载并安装 stunnel，记得再下个 openSSL。如果你不需要 SSL 的话跳过这步
      也没关系。
   3. 配置参考：
      #+begin_src emacs-lisp
@@ -93,7 +93,7 @@ BSD 或 Linux 上我更推荐用 notmuch。
   | C-c C-c             | 	发送邮件                                     |
   | C-c RET(回车)       | 	保存邮件到发送队列                           |
   | C                   | 	如果设置了多个邮箱，用 C 命令切换            |
-  | Q                   | 	退出Mew                                      |
+  | Q                   | 	退出 Mew                                      |
 
 * 一些“高级”技巧
 ** 多个邮箱
@@ -196,3 +196,4 @@ BSD 或 Linux 上我更推荐用 notmuch。
    后面一个就是密码了。
    
 * 待续
+  目前我正在探索 [[https://github.com/wanderlust/wanderlust][WanderLust]] ，这是一个同样非常强大的邮件的邮件客户端，完全由 Emacs Lisp 构成，但是缺乏详细的说明。

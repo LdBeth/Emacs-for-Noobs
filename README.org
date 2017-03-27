@@ -1,34 +1,28 @@
-* Emacs-on-Windows-for-Noobs
-  :PROPERTIES:
-  :CUSTOM_ID: emacs-on-windows-for-noobs
-  :END:
+#+TITLE: Emacs-on-Windows-for-Noobs
+#+STARTUP: showall
 
 新手指南
 
-[[http://spacemacs.org][[[https://cdn.rawgit.com/syl20bnr/spacemacs/442d025779da2f62fc86c2082703697714db6514/assets/spacemacs-badge.svg]]]]
+[[http://spacemacs.org][file:https://cdn.rawgit.com/syl20bnr/spacemacs/442d025779da2f62fc86c2082703697714db6514/assets/spacemacs-badge.svg]]
 
 时常更新
 
-** Windows平台Emacs新手入门QQ群
-   :PROPERTIES:
-   :CUSTOM_ID: windows平台emacs新手入门qq群
-   :END:
+** Windows 平台 Emacs 新手入门 QQ 群
+   群号： =623122498= 
 
-群号： =623122498= 点击链接加入群【Emacs on
-Windows入门】：https://jq.qq.com/?\_wv=1027&k=46CEVpJ
+   点击链接加入群 【Emacs on Windows 入门】：https://jq.qq.com/?\_wv=1027&k=46CEVpJ
 
-** TODO
-   :PROPERTIES:
-   :CUSTOM_ID: todo
-   :END:
+** Todo List
 
-*** Gnus & Mew
-    :PROPERTIES:
-    :CUSTOM_ID: gnus-mew
-    :END:
+*** TODO Mail Client [1/3]
 
-*** Eshell
-    :PROPERTIES:
-    :CUSTOM_ID: eshell
-    :END:
+**** TODO GNUS
+
+**** DONE Mew
+     CLOSED: [2017-03-27 一 18:45]
+
+**** TODO WanderLust
+
+*** TODO Eshell
     
+*** TODO Emacs Lisp
