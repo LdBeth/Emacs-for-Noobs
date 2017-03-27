@@ -1,0 +1,131 @@
+#+TITLE: GNUS 使用简介
+#+AUTHOR: LdBeth
+#+STARTUP: showall
+
+GNUS 常常用来作为 Emacs 中的邮件客户端，但是我不是很推荐用它来看邮件。因为它的默
+认行为和其它邮件客户端相比有些奇怪，用 IMAP 连接超慢等，种种问题。不过用它来上新
+闻组，看 Mailing List 倒很不错。
+
+* 基本配置
+  没什么额外可以说的，创建 =~/.gnus.el= 文件，里面配置如下：
+
+  #+begin_src emacs-lisp
+    ;; 这是我现在正在使用的配置，直接拿来做范例
+
+    ;;;;;;;;;;;;;;;;;;;;
+    ;;   USER
+    ;;;;;;;;;;;;;;;;;;;;
+    ;; 先像这样配置新闻组
+    (setq gnus-select-method '(nntp "news.gwene.org"))
+    (add-to-list 'gnus-secondary-select-methods '(nntp "news.newsfan.net"))
+    ;; 下面是 Maildir 配置的范例。可以成功使用，但是我觉得对 GNUS 来说不是很适合的方案
+    ;; (add-to-list 'gnus-secondary-select-methods '(nnml ""))
+    ;; (eval-after-load "mail-source"
+    ;;   '(add-to-list 'mail-sources '(maildir :path "~/Mail/inbox/"
+    ;;                                         :subdirs ("cur" "new"))))
+
+    ;;;;;;;;;;;;;;;;;;;;
+    ;;   LANGUAGE
+    ;;;;;;;;;;;;;;;;;;;;
+    (setq gnus-default-charset 'gbk;; 编码设置，鉴于一些中文的新闻组还在用 GBK，而且文本和标题用的是不同编码，设置得复杂点
+          gnus-group-name-charset-group-alist;; 关于编码设置，有篇不错的说明：http://blog.chinaunix.net/uid-45094-id-3011974.html
+          '((".*" . cn-gb-2312)
+            ("\\.com\\.cn" . gbk)
+            ("news\\.newsfan\\.net" . gb18030))
+          gnus-summary-show-article-charset-alist
+          '((1 . cn-gb-2312)
+            (2 . gb18030)
+            (3 . chinese-iso-8bit)
+            (4 . gbk)
+            (5 . big5)
+            (6 . utf-8))
+          gnus-newsgroup-ignored-charsets
+          '(unknown-8bit x-unknown iso-8859-1))
+
+    (setq mm-coding-system-priorities '(iso-8859-1 gb18030 utf-8))
+
+    (defalias 'mail-header-encode-parameter 'rfc2047-encode-parameter)
+    (add-to-list 'rfc2047-charset-encoding-alist '(gb18030 . B))
+    (add-to-list 'rfc2047-charset-encoding-alist '(gbk . B))
+
+    ;;;;;;;;;;;;;;;;;;;;
+    ;;   TITLE
+    ;;;;;;;;;;;;;;;;;;;;
+    (add-to-list 'nnmail-extra-headers nnrss-description-field)
+    (setq gnus-visible-headers
+          "^\\(^From:\\|^Subject:\\|^Date:\\|^Followup-To:
+           \\|^X-Newsreader:\\|^User-Agent:\\|^X-Mailer:
+           \\|Line:\\|Lines:\\|Content-Type:\\|NNTP-Posting-Host\\)")
+
+    ;;;;;;;;;;;;;;;;;;;;
+    ;;   FRAME
+    ;;;;;;;;;;;;;;;;;;;;
+
+    ;; (gnus-add-configuration
+    ;;  '(article
+    ;;    (vertical 1.0
+    ;;              (summary .40 point)
+    ;;              (article 1.0))))
+
+    (gnus-add-configuration;; 显示侧边栏的窗口布局
+     '(article
+       (horizontal 1.0
+                   (vertical 25
+                             (group 1.0))
+                   (vertical 1.0
+                             (summary 0.25 point)
+                             (article 1.0)))))
+    (gnus-add-configuration
+     '(summary
+       (horizontal 1.0
+                   (vertical 25
+                             (group 1.0))
+                   (vertical 1.0
+                             (summary 1.0 point)))))
+    ;;;;;;;;;;;;;;;;;;;;
+    ;;   PICTURES
+    ;;;;;;;;;;;;;;;;;;;;
+    ;; 加了这些配置就能显示图片了，macOS 用户推荐用 MacPort，用平滑滚动看图比较爽
+    (auto-image-file-mode)
+    (setq mm-inline-large-images t)
+    (add-to-list 'mm-attachment-override-types "image/*")
+
+
+    (setq gnus-posting-styles;; 解决某些乱码问题
+          '((".*"
+             (name "LdBeth")
+             (address "andpuke@foxmail.com")
+             (signature "macOS Sierra, Emacs+Gnus\n")
+             (eval (setq mm-coding-system-priorities
+                         '(iso-8859-1 utf-8))))
+            ("^cn\\.comp"
+             (name "LdBeth 好船")
+             (address "andpuke@foxmail.com")
+             (eval (setq mm-coding-system-priorities
+                         '(iso-8859-1 gb2312 utf-8))))
+            ("^tw\\.comp"
+             (name "LdBeth")
+             (address "andpuke@foxmail.com")
+             (eval (setq mm-coding-system-priorities
+                         '(iso-8859-1 big5 utf-8))))))
+
+  #+end_src
+  
+  为了方便起见，以下两行应该放在 =init.el= 里面。
+
+  #+begin_src emacs-lisp
+    (setq user-full-name "LdBeth")
+    (setq user-mail-address "andpuke@foxmail.com")
+  #+end_src
+  
+* 发信收信
+  因为我自己没有用 GNUS 收信，所以也不好讲什么细节。
+
+  推荐看 [[https://www.emacswiki.org/emacs/MultipleSMTPAccounts][EmacsWiKi]] 里面的介绍。
+
+* 常见问题
+  http://blog.csdn.net/lujun9972/article/details/46002803
+
+  来自 暗日 的博客。比较详细了。
+
+* 待续

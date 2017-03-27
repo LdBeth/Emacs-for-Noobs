@@ -14,9 +14,10 @@
 
 ** Todo List
 
-*** TODO Mail Client [1/3]
+*** TODO Mail Client [2/3]
 
-**** TODO GNUS
+**** DONE GNUS
+     CLOSED: [2017-03-27 一 21:31]
 
 **** DONE Mew
      CLOSED: [2017-03-27 一 18:45]
