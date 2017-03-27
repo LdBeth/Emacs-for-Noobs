@@ -14,7 +14,7 @@
 
 ** Todo List
 
-*** TODO Mail Client [2/3]
+*** TODO Mail Client [3/3]
 
 **** DONE GNUS
      CLOSED: [2017-03-27 一 21:31]
@@ -22,7 +22,8 @@
 **** DONE Mew
      CLOSED: [2017-03-27 一 18:45]
 
-**** TODO WanderLust
+**** DONE WanderLust
+     CLOSED: [2017-03-28 Tue 01:15]
 
 *** TODO Eshell
     

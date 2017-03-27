@@ -196,4 +196,4 @@ BSD 或 Linux 上我更推荐用 notmuch。
    后面一个就是密码了。
    
 * 待续
-  目前我正在探索 [[https://github.com/wanderlust/wanderlust][WanderLust]] ，这是一个同样非常强大的邮件的邮件客户端，完全由 Emacs Lisp 构成，但是缺乏详细的说明。
+  目前我正在使用 [[https://github.com/wanderlust/wanderlust][WanderLust]] ，这是一个同样非常强大的邮件的邮件客户端，完全由 Emacs Lisp 构成，但是缺乏详细的说明。
