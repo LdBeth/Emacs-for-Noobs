@@ -12,19 +12,10 @@
 
    点击链接加入群 【Emacs on Windows 入门】：https://jq.qq.com/?\_wv=1027&k=46CEVpJ
 
-** Todo List
-
-*** TODO Mail Client [3/3]
-
-**** DONE GNUS
-     CLOSED: [2017-03-27 一 21:31]
-
-**** DONE Mew
-     CLOSED: [2017-03-27 一 18:45]
-
-**** DONE WanderLust
-     CLOSED: [2017-03-28 Tue 01:15]
-
-*** TODO Eshell
-    
-*** TODO Emacs Lisp
+** TODO Todo List
+   + Mail Client
+     - [X] GNUS
+     - [X] Mew
+     - [X] WanderLust
+   + [ ] Eshell
+   + [ ] Emacs Lisp

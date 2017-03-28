@@ -6,12 +6,62 @@
 All mail clients suck. -cira, the author of another mail client, mutt
 #+end_quote
 
-WanderLust 是一个完全用 Emacs Lisp 实现的一个不需要在 Emacs 之外进行配置的邮件客
-户端。难能可贵的是，即使作为和 GNUS 同样的一个单线程应用，IMAP 收信速度任然碾压绝
-大部分其它客户端。
+#+begin_quote 
+  但是后来我发现其它 email 程序都有某种我不喜欢的怪毛病。-- 《Mutt 使用指南》
+#+end_quote
 
-和 Mew 一样，这个包最早是由日本人构建的，所以不需要额外配置字体就能正常显示中文。
-同时 WanderLust 也支持 NNTP，MailDir，POP，RSS 等多种协议。
+* 目录                                                                  :TOC:
+ - [[#wanderlust-的特点][WanderLust 的特点]]
+   - [[#超强的信件分类功能][超强的信件分类功能]]
+   - [[#信件打分排序功能][信件打分排序功能]]
+   - [[#几乎任意条件的彩色设置][几乎任意条件的彩色设置]]
+   - [[#可以随意绑定热键][可以随意绑定热键]]
+   - [[#设置条件挂钩][设置条件挂钩]]
+   - [[#批量邮件处理][批量邮件处理]]
+   - [[#_任选编辑器_][_任选编辑器_]]
+   - [[#高级的-mime-支持][高级的 MIME 支持]]
+   - [[#支持-pgp-加密][支持 PGP 加密]]
+   - [[#_mutt_-wanderlust-是免费的][_Mutt_ WanderLust 是免费的]]
+ - [[#开始][开始]]
+ - [[#配置收信方式][配置收信方式]]
+ - [[#配置发信方式][配置发信方式]]
+ - [[#maildir-设置][MailDir 设置]]
+ - [[#待续][待续]]
+
+* WanderLust 的特点
+  WanderLust 具有以下特点：
+
+** 超强的信件分类功能
+   这也是和 Mew/Mutt 相似的地方。
+
+** 信件打分排序功能
+   令人惊讶的是，和 Mutt 一样，它也有这种功能。
+
+** 几乎任意条件的彩色设置
+   是的。
+
+** 可以随意绑定热键
+   因为你在用 Emacs！
+
+** 设置条件挂钩
+   同样这也仰仗于 Emacs。
+
+** 批量邮件处理
+   当然可以了！
+
+** _任选编辑器_
+   额，这个好像做不到。不过你用的 Emacs 已经是最好的编辑器（为了防止被打我得加个
+   “之一”）了，而且你也可以用 Evil。
+
+** 高级的 MIME 支持
+   WangderLust 依赖于用 Emacs Lisp 实现的 MIME，能够很好地处理各种文件。
+
+** 支持 PGP 加密
+   我得说 Emacs 本来就支持。
+
+** _Mutt_ WanderLust 是免费的
+   听了上面那么多好处之后，还有比这更好的消息吗？
+   
 
 * 开始
   好吧，实际上这个插件极度缺少说明，你几乎无法找到任何介绍这个包的中文资料，甚至
@@ -110,6 +160,9 @@ WanderLust 是一个完全用 Emacs Lisp 实现的一个不需要在 Emacs 之�
     }
 
   #+end_src
+
+  虽然其实也可以直接用 WanderLust 的文件夹管理器来设置，但在第一次启动时最好还是
+  了解一下如何配置。
   
 * 配置发信方式
   下方是一个 SMTP 配置的范例，你应该放在 =.wl= 里。
@@ -160,4 +213,10 @@ WanderLust 是一个完全用 Emacs Lisp 实现的一个不需要在 Emacs 之�
              ("From" . wl-from))))
   #+end_src
   
+* MailDir 设置
+  尽管 WanderLust 是一个 IMAP 客户端，它也支持用 MailDir。而且不像 GNUS 是把邮件
+  全部导入到本地文件夹，WanderLust 是直接对 MailDir 进行读写操作，这使得它可以和
+  我很喜欢的 CLT 邮件客户端 Mutt 共存。
+
+
 * 待续 
