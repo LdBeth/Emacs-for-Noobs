@@ -11,6 +11,7 @@ All mail clients suck. -cira, the author of another mail client, mutt
 #+end_quote
 
 * 目录                                                                  :TOC:
+ - [[#简介][简介]]
  - [[#wanderlust-的特点][WanderLust 的特点]]
    - [[#超强的信件分类功能][超强的信件分类功能]]
    - [[#信件打分排序功能][信件打分排序功能]]
@@ -27,6 +28,16 @@ All mail clients suck. -cira, the author of another mail client, mutt
  - [[#配置发信方式][配置发信方式]]
  - [[#maildir-设置][MailDir 设置]]
  - [[#待续][待续]]
+
+* 简介
+  WanderLust 是一个完全用 Emacs Lisp 实现的一个不需要在 Emacs 之外进行配置的邮件客
+  户端。难能可贵的是，即使作为和 GNUS 同样的一个单线程应用，IMAP 收信速度仍然碾压
+  绝大部分其它客户端。
+
+  和 Mew 一样，这个包最早是由日本人构建的，所以不需要额外配置字体就能正常显示中文。
+  同时 WanderLust 也支持 NNTP，MailDir，POP，RSS 等多种协议。
+
+  为了向《Mutt 使用指南》致敬，我在这里列出了一些不错的特性。
 
 * WanderLust 的特点
   WanderLust 具有以下特点：
