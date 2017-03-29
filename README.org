@@ -19,3 +19,4 @@
      - [X] WanderLust
    + [ ] Eshell
    + [ ] Emacs Lisp
+   + [ ] Wiki
