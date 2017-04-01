@@ -1,0 +1,66 @@
+#+TITLE: Emacs on Windows调用外部程序
+#+AUTHOR: Zhixing
+#+STARTUP: showall
+
+* 目录                                                      :TOC:
+ - [[#程序调用][程序调用]]
+ - [[#gnupg][GnuPG]]
+ - [[#git][Git]]
+ - [[#other-programs][Other Programs]]
+ - [[#待补充][待补充……]]
+   - [[#texlive调用][TexLive调用]]
+
+* 程序调用
+=Emacs= 在 =Windows= 上使用时要不可避免的调用外部程序，一般情况下是要把可执行文件的路
+径加入到 =$PATH= 里面即可。
+通常只需要把安装路径加入到 =Emacs= 的配置里面即可。如：
+#+BEGIN_SRC emacs lisp
+(add-to-list 'exec-path "path/to/program/")
+#+END_SRC
+
+* GnuPG
+ =GnuPG= 的调用有点区别，与上面的方法不一样。
+#+BEGIN_SRC emacs lisp
+(custom-set-variables '(epg-gpg-program "path/to/program/"))
+#+END_SRC
+在 =Emacs= 的配置里加入这句话即可。
+默认：加密时选择加密方法，修改文件后保存时需要重新输入密码（重新加密）。
+在 =Windows= 上可以把这个软件做成便携软件直接放在优盘等地方，换电脑时不必重新安装。
+官网直接提供了制件便携版的方法。
+
+* Git
+ =Git= 做为一个轻量、高效的版本控制工具，是 =Emacser= 应该掌握的工具之一。
+它的学习也非常简单，官网提供的 =Pro Git中文版= 可以让你在一晚上学会它的使用。
+它的初始配置也非常简单，只需要运行 =config= 来设置一下自己的用户名和邮箱就可以了。
+我这里要说的是 =Portable Git= 的初始设置。
+首先运行 =git-bash.exe= ，直接运行手册上的命令即可：
+#+BEGIN_SRC emacs lisp
+$ git config --system user.name "yourname"
+$ git config --system user.email youremail
+#+END_SRC
+
+运行上面的命令之后，配置会自动加在系统配置里面(
+=\PortableGit\mingw64\etc\gitconfig=)
+这不在重启或者移动到另一个电脑上时发生改变。
+如果想在不同的电脑上使用不同的配置，只需要把上面的命令中 =system= 换成 =global= 即可。不
+过不建议这么做，因为它会把配置放在电脑上。想分别设置的话可以放在你的 =Repository= 的文件
+夹 =.git= 里面。
+
+然后把 =path= 加进 =Emacs= 就可以了。
+#+BEGIN_SRC emacs lisp
+(add-to-list 'exec-path "~/PortabelGit/bin/")
+#+END_SRC
+
+* Other Programs
+其它程序，比如 =w3m= , =ccrypt=,  =aspell= 等都可以按照这种方法添加。
+也可以直接把这些程序的路径一起加到 =$PATH= 里面：
+#+BEGIN_SRC emacs lisp
+(setq exec-path (append exec-path (list
+                                     "path/to/program01/"
+                                     "path/to/program02/"
+                                  )))
+#+END_SRC
+
+* 待补充……
+** TODO TexLive调用
+使用LaTeX来导出PDF文件。

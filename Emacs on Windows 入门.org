@@ -168,9 +168,9 @@
   的借鉴。
 
 ** 如何使用 [[http://spacemacs.org][Spacemacs]]
-   直接下载 [[https://github.com/syl20bnr/spacemacs/tree/develop][Spacemacs]] 的 [[https://github.com/syl20bnr/spacemacs/archive/develop.zip][Zip]] 文件，然后放到 HOME/.emacs.d/下面即可。按照说明进行操作即可。如
-   果出现错误可能是墙的原因，请添加下面的代码到 HOME 目录下.spacemacs 文件里
-   =dotspacemacs/user-init= 部分
+   直接下载 [[https://github.com/syl20bnr/spacemacs/tree/develop][Spacemacs]] 的 [[https://github.com/syl20bnr/spacemacs/archive/develop.zip][Zip]] 文件，然后放到 HOME/.emacs.d/下面即可。按照说明进行
+   操作即可。如果出现错误可能是墙的原因，请添加下面的代码到 HOME 目录下.spacemacs
+   文件里=dotspacemacs/user-init= 部分
 
    #+begin_src emacs-lisp
    (setq configuration-layer--elpa-archives
@@ -180,6 +180,7 @@
    #+end_src
    然后重启。
 
+   详见 [[http://spacemacs.org/doc/FAQ][FAQ]] ([[https://github.com/LdBeth/Emacs-for-Noobs/blob/master/Sapcemacs%2520FAQ.org][中文]])
 
 ** 如何使用子龙山人的配置
    直接下载 Spacemacs 的 zip 文件，解压到 HOME/.emacs.d/下面。
