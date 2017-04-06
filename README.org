@@ -15,8 +15,10 @@
 ** TODO Todo List
    + Mail Client
      - [X] GNUS
+       + [ ] Score
      - [X] Mew
      - [X] WanderLust
    + [ ] Eshell
    + [ ] Emacs Lisp
    + [ ] Wiki
+   + [ ] Magit
