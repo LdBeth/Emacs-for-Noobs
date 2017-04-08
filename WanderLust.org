@@ -118,6 +118,18 @@ All mail clients suck. -cira, the author of another mail client, mutt
   elfeed 的中文支持差爆了，甚至还不如那个性能比较低的 newsticker。）具体格式参照
   Manual。
 
+  但是如果你需要马上上手的话，我就用比较常见的 QQ 邮箱举例了。
+
+  #+BEGIN_SRC conf-unix
+    %inbox:7XXXXXXX9/login@imap.qq.com:993!  "QQ Mail"
+    路径:用户名/验证方式（QQ 邮箱需要设为 login）@服务器:端口!加上感叹号表示要使用 SSL "用于显示的名称，可以不设"
+  #+END_SRC
+
+  需要注意的是，用户名用 =john@foxmail.com= 之类的，也就是中间有@符号的，会导致
+  无法正确连接到服务器。以及登陆时候的密码是开通 IMAP 服务时随机生成的，默认设置
+  下每次都需要重新输入密码，很麻烦。目前由于我用 =getmail= 凑合的，还没有很好的
+  解决办法。
+
   生成的邮件列表结构是这样的：
 
   #+begin_example 
@@ -221,13 +233,14 @@ All mail clients suck. -cira, the author of another mail client, mutt
              (wl-smtp-posting-user . "myname@company.com")
              (wl-smtp-posting-server . "mail.company.com")
              (wl-local-domain . "mail.company.com"))
-             ("From" . wl-from))))
+             ("From" . wl-from)))
   #+end_src
   
 * MailDir 设置
   尽管 WanderLust 是一个 IMAP 客户端，它也支持用 MailDir。而且不像 GNUS 是把邮件
   全部导入到本地文件夹，WanderLust 是直接对 MailDir 进行读写操作，这使得它可以和
-  我很喜欢的 CLT 邮件客户端 Mutt 共存。
+  我很喜欢的 CLT 邮件客户端 Mutt 共存。我使用 WanderLust 其中之一的原因也是我至
+  今还没找到 Mew 如何使用 MailDir。
 
 
 * 待续 
