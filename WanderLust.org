@@ -27,6 +27,7 @@ All mail clients suck. -cira, the author of another mail client, mutt
  - [[#配置收信方式][配置收信方式]]
  - [[#配置发信方式][配置发信方式]]
  - [[#maildir-设置][MailDir 设置]]
+ - [[#关于密码][关于密码]]
  - [[#待续][待续]]
 
 * 简介
@@ -126,9 +127,7 @@ All mail clients suck. -cira, the author of another mail client, mutt
   #+END_SRC
 
   需要注意的是，用户名用 =john@foxmail.com= 之类的，也就是中间有@符号的，会导致
-  无法正确连接到服务器。以及登陆时候的密码是开通 IMAP 服务时随机生成的，默认设置
-  下每次都需要重新输入密码，很麻烦。目前由于我用 =getmail= 凑合的，还没有很好的
-  解决办法。
+  无法正确连接到服务器。目前由于我用 =getmail= 凑合的，还没有很好的解决办法。
 
   生成的邮件列表结构是这样的：
 
@@ -242,5 +241,10 @@ All mail clients suck. -cira, the author of another mail client, mutt
   我很喜欢的 CLT 邮件客户端 Mutt 共存。我使用 WanderLust 其中之一的原因也是我至
   今还没找到 Mew 如何使用 MailDir。
 
+* 关于密码
+  不像 Mew 那样需要用那种奇怪的方式来使得不用每次进入邮箱都要输入密码，
+  WanderLust 支持用 =elmo-passwd-alist-save= 来在第一次登陆输入密码后保存密码。
+  密码通常被保存在 =~/.elmo/passwd= 。不用担心安全问题，因为密码当然不是明文，而
+  是被加密处理后保存的。
 
 * 待续 
