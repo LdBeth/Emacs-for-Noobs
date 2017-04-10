@@ -28,6 +28,8 @@ All mail clients suck. -cira, the author of another mail client, mutt
    - [[#一个相对复杂的范例][一个相对复杂的范例]]
    - [[#举例][举例]]
  - [[#配置发信方式][配置发信方式]]
+   - [[#使用内置-smtp-发信][使用内置 SMTP 发信]]
+   - [[#使用-sendmailmsmtp][使用 sendmail/msmtp]]
  - [[#maildir-设置][MailDir 设置]]
  - [[#faq][FAQ]]
    - [[#密码][密码]]
@@ -214,6 +216,7 @@ All mail clients suck. -cira, the author of another mail client, mutt
   #+END_SRC
 
 * 配置发信方式
+** 使用内置 SMTP 发信
   下方是一个 SMTP 配置的范例，你应该放在 =.wl= 里，或者其它合适的地方。
 
   #+begin_src emacs-lisp
@@ -261,6 +264,15 @@ All mail clients suck. -cira, the author of another mail client, mutt
              (wl-local-domain . "mail.company.com"))
              ("From" . wl-from)))
   #+end_src
+
+** 使用 sendmail/msmtp
+   如果你已经安装并设置过 sendmail 或者 msmtp，你当然也可以用这两个 MUA 来发件。
+
+   #+BEGIN_SRC emacs-lisp
+     (setq wl-draft-send-mail-function 'wl-draft-send-mail-with-sendmail)
+   #+END_SRC
+   
+   如果用的是 msmtp，还需要一些额外配置，详见 [[https://www.emacswiki.org/emacs/GnusMSMTP][EmacsWiki]] 。
   
 * MailDir 设置
   尽管 WanderLust 是一个 IMAP 客户端，它也支持用 MailDir。而且不像 GNUS 是把邮件
