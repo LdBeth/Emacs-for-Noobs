@@ -194,8 +194,16 @@ All mail clients suck. -cira, the author of another mail client, mutt
     路径:用户名/验证方式（QQ 邮箱需要设为 login）@服务器:端口!加上感叹号表示要使用 SSL "用于显示的名称，可以不设"
   #+END_SRC
 
-  需要注意的是，用户名用 =john@foxmail.com= 之类的，也就是中间有@符号的，会导致
-  无法正确连接到服务器。你可以直接用如下设置：
+  需要注意的是，用户名用 =john@gmail.com= 之类的，也就是中间有@符号的，会导致
+  无法正确连接到服务器。这时候你需要用 =""= 把用户名包起来。
+
+  下面是一个 Gmail 的例子。
+
+  #+BEGIN_SRC conf-unix
+    %inbox:"john@gmail.com"/clear@imap.gmail.com:993!  "Gmail"
+  #+END_SRC
+  
+  当然你也可以用 Emacs Lisp 来配置，不过一般不推荐这样做。
 
   #+BEGIN_SRC emacs-lisp
     (setq elmo-imap4-default-server "imap.gmail.com"
@@ -204,11 +212,9 @@ All mail clients suck. -cira, the author of another mail client, mutt
           elmo-imap4-default-port '993
           elmo-imap4-default-stream-type 'ssl)
   #+END_SRC
-  
-  是不是有些熟悉？:P
 
 * 配置发信方式
-  下方是一个 SMTP 配置的范例，你应该放在 =.wl= 里。
+  下方是一个 SMTP 配置的范例，你应该放在 =.wl= 里，或者其它合适的地方。
 
   #+begin_src emacs-lisp
     (setq wl-smtp-connection-type 'starttls
