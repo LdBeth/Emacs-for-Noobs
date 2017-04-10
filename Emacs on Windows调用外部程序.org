@@ -1,4 +1,4 @@
-#+TITLE: Emacs on Windows调用外部程序
+#+TITLE: Emacs on Windows外部程序调用
 #+AUTHOR: Zhixing
 #+STARTUP: showall
 
@@ -6,24 +6,41 @@
  - [[#程序调用][程序调用]]
  - [[#gnupg][GnuPG]]
  - [[#git][Git]]
- - [[#other-programs][Other Programs]]
- - [[#待补充][待补充……]]
-   - [[#texlive调用][TexLive调用]]
+ - [[#texlive][TexLive]]
 
 * 程序调用
 =Emacs= 在 =Windows= 上使用时要不可避免的调用外部程序，一般情况下是要把可执行文件的路
-径加入到 =$PATH= 里面即可。
-通常只需要把安装路径加入到 =Emacs= 的配置里面即可。如：
+径加入到 =exec-path= 里面即可。如：
 #+BEGIN_SRC emacs lisp
 (add-to-list 'exec-path "path/to/program/")
 #+END_SRC
 
-* GnuPG
- =GnuPG= 的调用有点区别，与上面的方法不一样。
+但是，对某些程序来说，上面的方法没有产生应有的效果。 winterTTr 提供了
+一个比较省事的方法: [[http://www.voidcn.com/blog/winterttr/article/p-3231165.html][emacs调用外部命令的环境设置]] ，主要原因是外部程序的调
+用有时也需要emacs的子进程去调用，所以需要把路径加入到 =PATH= 里面。
+把下面的代码加进配置即可。
+
 #+BEGIN_SRC emacs lisp
-(custom-set-variables '(epg-gpg-program "path/to/program/"))
+  (defun wttr/prepend-to-exec-path (path)
+    "prepand the path to the emacs intenral `exec-path' and \"PATH\" env variable.
+Return the updated `exec-path'"
+    (setenv "PATH" (concat (expand-file-name path)
+                           path-separator
+                           (getenv "PATH")))
+    (setq exec-path
+          (cons (expand-file-name path)
+                exec-path)))
+
+  (mapc #'wttr/prepend-to-exec-path
+        (reverse ( list
+        ;; your path to program
+        "~/.emacs.d/extra-bin/clang"
+        (concat Emacs "program/Aspell/bin/")
+           )))
 #+END_SRC
-在 =Emacs= 的配置里加入这句话即可。
+
+
+* GnuPG
 默认：加密时选择加密方法，修改文件后保存时需要重新输入密码（重新加密）。
 在 =Windows= 上可以把这个软件做成便携软件直接放在优盘等地方，换电脑时不必重新安装。
 官网直接提供了制件便携版的方法。
@@ -46,21 +63,7 @@ $ git config --system user.email youremail
 过不建议这么做，因为它会把配置放在电脑上。想分别设置的话可以放在你的 =Repository= 的文件
 夹 =.git= 里面。
 
-然后把 =path= 加进 =Emacs= 就可以了。
-#+BEGIN_SRC emacs lisp
-(add-to-list 'exec-path "~/PortabelGit/bin/")
-#+END_SRC
+* TexLive
+使用 =LaTeX= 可以非常方便的把 =org= 文件导成 =PDF= 文件。
+官网提供了各种安装方法，安装之后把路径加入到上面的代码中即可。
 
-* Other Programs
-其它程序，比如 =w3m= , =ccrypt=,  =aspell= 等都可以按照这种方法添加。
-也可以直接把这些程序的路径一起加到 =$PATH= 里面：
-#+BEGIN_SRC emacs lisp
-(setq exec-path (append exec-path (list
-                                     "path/to/program01/"
-                                     "path/to/program02/"
-                                  )))
-#+END_SRC
-
-* 待补充……
-** TODO TexLive调用
-使用LaTeX来导出PDF文件。
