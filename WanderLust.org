@@ -29,7 +29,7 @@ All mail clients suck. -cira, the author of another mail client, mutt
    - [[#举例][举例]]
  - [[#配置发信方式][配置发信方式]]
    - [[#使用内置-smtp-发信][使用内置 SMTP 发信]]
-   - [[#使用-sendmailmsmtp][使用 sendmail/msmtp]]
+   - [[#使用-sendmailmsmtp][使用 =sendmail/msmtp=]]
  - [[#maildir-设置][MailDir 设置]]
  - [[#faq][FAQ]]
    - [[#密码][密码]]
@@ -126,9 +126,10 @@ All mail clients suck. -cira, the author of another mail client, mutt
   #+end_src
   
   明白了吗？这就是一个邮箱入口列表了，用不同的标记来告诉 WanderLust 到哪里取邮件。
-  这甚至比用 Emacs Lisp 配置还要直观，让我想起了 =org-elfeed= 。（说实话我觉得
-  elfeed 的中文支持差爆了，甚至还不如那个性能比较低的 newsticker。）具体格式参照
-  Manual。
+  =%= 表示 IMAP 信箱， =.= 表示本地 MailDir 格式的信箱， =&= 表示 POP 信箱。这甚
+  至比用 Emacs Lisp 配置还要直观，让我想起了用 Org-mode 来配置 RSS Feeds 的
+  =org-elfeed= 。（说实话我觉得 elfeed 的中文支持差爆了，甚至还不如那个性能比较
+  低的 newsticker。）具体格式参照 Manual。
 
   生成的邮件列表结构是这样的：
 
@@ -199,7 +200,8 @@ All mail clients suck. -cira, the author of another mail client, mutt
   需要注意的是，用户名用 =john@gmail.com= 之类的，也就是中间有@符号的，会导致
   无法正确连接到服务器。这时候你需要用 =""= 把用户名包起来。
 
-  下面是一个 Gmail 的例子。
+  下面是一个 Gmail 的例子。（注意：中国大陆地区 Gmail 服务已经不可用，包括网页和
+  POP、IMAP、SMTP 服务。）
 
   #+BEGIN_SRC conf-unix
     %inbox:"john@gmail.com"/clear@imap.gmail.com:993!  "Gmail"
@@ -265,29 +267,29 @@ All mail clients suck. -cira, the author of another mail client, mutt
              ("From" . wl-from)))
   #+end_src
 
-** 使用 sendmail/msmtp
-   如果你已经安装并设置过 sendmail 或者 msmtp，你当然也可以用这两个 MUA 来发件。
+** 使用 =sendmail/msmtp=
+   如果你已经安装并设置过 =sendmail= 或者 =msmtp= ，你当然也可以用这两个 MUA 来发件。
 
    #+BEGIN_SRC emacs-lisp
      (setq wl-draft-send-mail-function 'wl-draft-send-mail-with-sendmail)
    #+END_SRC
    
-   如果用的是 msmtp，还需要一些额外配置，详见 [[https://www.emacswiki.org/emacs/GnusMSMTP][EmacsWiki]] 。
+   如果用的是 =msmtp= ，还需要一些额外配置，详见 [[https://www.emacswiki.org/emacs/GnusMSMTP][EmacsWiki]] 。
   
 * MailDir 设置
   尽管 WanderLust 是一个 IMAP 客户端，它也支持用 MailDir。而且不像 GNUS 是把邮件
   全部导入到本地文件夹，WanderLust 是直接对 MailDir 进行读写操作，这使得它可以和
   我很喜欢的 CLT 邮件客户端 Mutt 共存。我使用 WanderLust 其中之一的原因也是我至
-  今还没找到 Mew 如何使用 MailDir。
+  今还没找到 Mew 如何使用 MailDir（后来发现其实和 WanderLust 差不多）。
 
 * FAQ
-  在这里我会对几个常用的功能进行说明。
+  在这里我会对几个常见的问题进行说明。
 
 ** 密码
-  不像 Mew 那样需要用那种奇怪的方式来使得不用每次进入邮箱都要输入密码，
-  WanderLust 支持用 =elmo-passwd-alist-save= 来在第一次登陆输入密码后保存密码。
-  密码通常被保存在 =~/.elmo/passwd= 。不用担心安全问题，因为密码当然不是明文，而
-  是被加密处理后保存的。
+  不像 Mew 那样需要用那种奇怪的方式来避免每次进入邮箱都要输入密码，WanderLust 支
+  持用 =elmo-passwd-alist-save= 来在第一次登陆输入密码后保存密码。密码通常被保存
+  在 =~/.elmo/passwd= 。不用担心安全问题，因为密码当然不是明文，而是被加密处理后
+  保存的。
 
 ** 邮件头显示了一大堆乱七八糟的东西
    #+BEGIN_SRC emacs-lisp
