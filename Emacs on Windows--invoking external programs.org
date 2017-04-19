@@ -45,6 +45,12 @@ Return the updated `exec-path'"
 在 =Windows= 上可以把这个软件做成便携软件直接放在优盘等地方，换电脑时不必重新安装。
 官网直接提供了制件便携版的方法。
 
+调用这个程序时，上面的方法没有产生应有的效果，可以使用下面的代码：
+#+BEGIN_SRC emacs lisp
+(custom-set-variables '(epg-gpg-program "path/to/program/")) 
+#+END_SRC
+
+
 * Git
  =Git= 做为一个轻量、高效的版本控制工具，是 =Emacser= 应该掌握的工具之一。
 它的学习也非常简单，官网提供的 =Pro Git中文版= 可以让你在一晚上学会它的使用。
