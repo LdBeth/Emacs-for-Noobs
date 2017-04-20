@@ -1,0 +1,82 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
+        "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<!-- LINK-REV-MADE -->
+<link rev="made" href="mailto:webmaster@Costume-Party.local">
+<!-- LINK-REV-MADE -->
+<title>Namazu est un moteur de recherche textuel</title>
+<style type="text/css"><!--
+  strong.keyword { color: Red; }
+  p.example      { text-indent: 1em; 
+                   color: Navy;
+		   font-weight: bold;
+                   font-family: monospace; }
+  code           { color: Navy;
+                   font-family: monospace; }
+  code.example   { color: Navy;
+		   font-weight: bold;
+                   font-family: monospace; }
+  code.operator  { color: Navy;
+                   font-family: monospace; 
+		   font-weight: bold; }
+--></style>
+</head>
+<body lang="fr">
+<h1>Namazu est un moteur de recherche textuel</h1>
+<p>
+Cet index contient <!-- FILE --> 8 <!-- FILE --> documents et
+<!-- KEY --> 4,325 <!-- KEY --> mots clefs. 
+</p>
+<p>
+<strong>Derni&egrave;re modification : <!-- DATE --> 2017-04-20 <!-- DATE --></strong>
+</p>
+<hr>
+<form method="get" action="{cgi}">
+<p>
+<strong>Crit&egrave;re de recherche :</strong> 
+<input type="text" name="query" size="40">
+<input type="submit" name="submit" value="Rechercher !">
+<!-- <input type="hidden" name="idxname" value="foobar"> -->
+<a href="{cgi}">[Aide]</a>
+</p>
+<p>
+<strong>Affichage :</strong>
+<select name="max">
+<option value="10">10</option>
+<option selected value="20">20</option>
+<option value="30">30</option>
+<option value="50">50</option>
+<option value="100">100</option>
+</select>
+<strong>Description :</strong>
+<select name="result">
+<option selected value="normal">normal</option>
+<option value="short">courte</option>
+</select>
+<strong>Tri :</strong>
+<select name="sort">
+<option selected value="score">par score</option>
+<option value="date:late">par date (+ r&eacute;cent en premier)</option>
+<option value="date:early">par date (+ ancien en premier)</option>
+<option value="field:subject:ascending">par titre (ordre ascendant)</option>
+<option value="field:subject:descending">par titre (ordre descendant)</option>
+<option value="field:from:ascending">par auteur (ordre ascendant)</option>
+<option value="field:from:descending">par auteur (ordre descendant)</option>
+<option value="field:size:ascending">par taille (ordre ascendant)</option>
+<option value="field:size:descending">par taille (ordre descendant)</option>
+<option value="field:uri:ascending">par URI (ordre ascendant)</option>
+<option value="field:uri:descending">par URI (ordre descendant)</option>
+</select>
+</p>
+<!--
+<p>
+<strong>Cible :</strong>
+<ul>
+<li><input type="checkbox" name="idxname" value="foo" checked>foo</li>
+<li><input type="checkbox" name="idxname" value="bar">bar</li>
+<li><input type="checkbox" name="idxname" value="baz">baz</li>
+</ul>
+</p>
+-->
+</form>

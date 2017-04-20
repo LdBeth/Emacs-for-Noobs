@@ -1,0 +1,65 @@
+<h2><a name="tips" id="tips">Trucs pour la recherche</a></h2>
+
+<p>
+Si vous avez des probl&egrave;mes avec la recherche, vous pouvez essayer les trucs suivants.
+</p>
+
+<ul>
+<li>V&eacute;rifiez l'orthographe de votre mot clef<br>
+Namazu ne peut rien trouver sans la bonne orthographe.
+</li>
+
+<li>Ajoutez des mots clefs<br>
+
+Si vous n'obtenez aucun r&eacute;sultat ou trop peu de r&eacute;sultats, vous pouvez ajouter un
+ou plusieurs mots clefs li&eacute;s avec l'op&eacute;rateur <code
+class="operator">or</code>. Cela rend votre recherche
+plus susceptible de donner des r&eacute;sultats. Ex. : <br>
+<code class="example">tex or ptex or latex or latex2e</code><br>
+
+Si vous obtenez trop de r&eacute;sultats, vous pouvez ajouter un ou plusieurs
+mots clefs li&eacute;s avec l'op&eacute;rateur <code class="operator">and</code>
+. Cela rend votre recherche plus limit&eacute;e. Ex. : <br>
+<code class="example">latex and dvi2ps and eps</code>
+</li>
+
+<li>Essayez la recherche de sous-cha&icirc;nes<br>
+
+Si vous n'obtenez aucun r&eacute;sultat ou trop peu de r&eacute;sultats, vous pouvez essayer
+la recherche de sous-cha&icirc;nes.
+
+You can specify <code class="example">tex*</code> to
+search for terms which begin with
+<code>tex</code> (e.g., <code>tex</code>,
+<code>texi2html</code>,
+<code>texindex</code>, <code>text</code>).
+<br>
+
+Vous pouvez sp&eacute;cifier <code class="example">*tex</code> pour
+rechercher les termes qui se terminent en <code>tex</code> (ex. :
+<code>bibtex</code>, 
+<code>jlatex</code>, <code>latex</code>,
+<code>platex</code>, <code>ptex</code>, <code>vertex</code>).
+<br>
+
+Vous pouvez sp&eacute;cifier <code class="example">*tex*</code> pour
+rechercher les termes qui contiennent <code>tex</code> (ils sont nombreux).
+<br>
+</li>
+
+<li>Vous avez essay&eacute; la recherche d'une phrase mais cela donne des documents qui
+ne contiennent pas votre phrase.<br>
+
+C'est un d&eacute;faut de Namazu. La pr&eacute;cision de la recherche de phrase n'est
+pas de 100 %, donc cela peut parfois conduire &agrave; des r&eacute;sultats faux.
+</li>
+
+<li>Vous voulez utiliser <code class="operator">and</code>,
+<code class="operator">or</code> ou <code
+class="operator">not</code> en tant que mots clefs<br>
+Vous pouvez les entourer respectivement avec des guillemets comme <code
+class="operator">"..."</code> ou des accolades comme <code
+class="operator">{...}</code>.
+</li>
+
+</ul>

@@ -1,0 +1,2 @@
+<dt>${namazu::counter}. <strong><a href="${uri}">${title}</a></strong> (¥¹¥³¥¢: ${namazu::score})</dt>
+<dd><a href="${uri}">${uri}</a> (${size} bytes)<br><br></dd>

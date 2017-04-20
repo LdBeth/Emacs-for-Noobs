@@ -1,0 +1,84 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
+        "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<!-- LINK-REV-MADE -->
+<link rev="made" href="mailto:webmaster@Costume-Party.local">
+<!-- LINK-REV-MADE -->
+<title>Namazu: a Full-Text Search Engine</title>
+<style type="text/css"><!--
+  strong.keyword { color: Red; }
+  p.example      { text-indent: 1em; 
+                   color: Navy;
+		   font-weight: bold;
+                   font-family: monospace; }
+  code           { color: Navy;
+                   font-family: monospace; }
+  code.example   { color: Navy;
+		   font-weight: bold;
+                   font-family: monospace; }
+  code.operator  { color: Navy;
+                   font-family: monospace; 
+		   font-weight: bold; }
+--></style>
+</head>
+<body lang="ja">
+<h1>Namazu による全文検索システム</h1>
+<p>
+現在、<!-- FILE --> 8 <!-- FILE --> の文書がインデックス化され、
+<!-- KEY --> 4,325 <!-- KEY --> 個のキーワードが登録されています。
+</p>
+<p>
+<strong>インデックスの最終更新日: <!-- DATE --> 2017-04-20 <!-- DATE --></strong>
+</p>
+<hr>
+<form method="get" action="{cgi}">
+<p>
+<strong>検索式:</strong> 
+<input type="text" name="query" size="40">
+<input type="submit" name="submit" value="Search!">
+<input type="hidden" name="whence" value="0">
+<!-- <input type="hidden" name="idxname" value="foobar"> -->
+<a href="{cgi}">[検索方法]</a>
+</p>
+<p>
+<strong>表示件数:</strong>
+<select name="max">
+<option value="10">10</option>
+<option selected value="20">20</option>
+<option value="30">30</option>
+<option value="50">50</option>
+<option value="100">100</option>
+</select>
+<strong>表示形式:</strong>
+<select name="result">
+<option selected value="normal">標準</option>
+<option value="short">簡潔</option>
+</select>
+<strong>ソート:</strong>
+<select name="sort">
+<option selected value="score">スコア</option>
+<option value="date:late">日付 (新しい順)</option>
+<option value="date:early">日付 (古い順)</option>
+<option value="field:subject:ascending">題名 (昇順)</option>
+<option value="field:subject:descending">題名 (降順)</option>
+<option value="field:from:ascending">著者 (昇順)</option>
+<option value="field:from:descending">著者 (降順)</option>
+<option value="field:size:ascending">サイズ (昇順)</option>
+<option value="field:size:descending">サイズ (降順)</option>
+<option value="field:uri:ascending">URI (昇順)</option>
+<option value="field:uri:descending">URI (降順)</option>
+</select>
+</p>
+<!--
+<p>
+<strong>検索対象:</strong>
+<ul>
+<li><input type="checkbox" name="idxname" value="foo" checked>foo</li>
+<li><input type="checkbox" name="idxname" value="bar">bar</li>
+<li><input type="checkbox" name="idxname" value="baz">baz</li>
+</ul>
+</p>
+-->
+</form>
+

@@ -1,0 +1,193 @@
+<h2><a name="query" id="query">Requ&ecirc;te</a></h2>
+
+<h3><a name="query-term" id="query-term">Requ&ecirc;te avec un seul terme</a></h3>
+<p>
+La requ&ecirc;te sp&eacute;cifie un seul terme pour retrouver tous
+les documents qui contiennent le terme. Ex. : 
+</p>
+
+<p class="example">
+namazu
+</p>
+
+<h3><a name="query-and" id="query-and">Requ&ecirc;te AND</a></h3> 
+
+<p>
+La requ&ecirc;te sp&eacute;cifie deux termes ou plus pour retrouver tous
+les documents qui contiennent tous les termes &agrave; la fois. Vous pouvez ins&eacute;rer l'op&eacute;rateur
+<code class="operator">and</code> entre les termes. Ex. : 
+</p>
+
+<p class="example">
+Linux and Netscape
+</p>
+
+<p>
+Vous pouvez omettre l'op&eacute;rateur <code class="operator">and</code>. Les termes
+s&eacute;par&eacute;s par un ou plusieurs espaces sont consid&eacute;r&eacute;s comme une requ&ecirc;te avec AND.
+</p>
+
+<h3><a name="query-or" id="query-or">Requ&ecirc;te OR</a></h3>
+<p>
+La requ&ecirc;te sp&eacute;cifie deux termes ou plus pour retrouver tous
+les documents qui contiennent l'un des termes. Vous pouvez ins&eacute;rer l'op&eacute;rateur
+<code class="operator">or</code> entre les termes.
+Ex. :
+</p>
+
+<p class="example">
+Linux or FreeBSD
+</p>
+
+<h3><a name="query-not" id="query-not">Requ&ecirc;te NOT</a></h3>
+<p>
+La requ&ecirc;te sp&eacute;cifie deux termes ou plus pour retrouver tous
+les documents qui contiennent un premier terme mais qui ne contiennent pas les
+termes suivants. Vous pouvez ins&eacute;rer l'op&eacute;rateur <code class="operator">not</code>
+entre les termes pour faire une requ&ecirc;te NOT. Ex. :
+</p>
+
+<p class="example">
+Linux not UNIX
+</p>
+
+
+<h3><a name="query-grouping" id="query-grouping">Regroupement</a></h3>
+<p>
+Vous pouvez regrouper les requ&ecirc;tes en les entourant par
+des parenth&egrave;ses. Les parenth&egrave;ses doivent &ecirc;tre s&eacute;par&eacute;es par un ou
+plusieurs espaces. Ex. : 
+</p>
+
+<p class="example">
+( Linux or FreeBSD ) and Netscape not Windows
+</p>
+
+<h3><a name="query-phrase" id="query-phrase">Recherche de phrase</a></h3>
+<p>
+Vous pouvez rechercher une phrase qui consiste en deux ou plusieurs termes
+en les entourant avec des guillemets comme
+<code class="operator">"..."</code> ou avec des accolades comme <code class="operator">{...}</code>.
+Dans Namazu, la pr&eacute;cision de la recherche de phrase n'est pas de 100 %,
+cela peut donc conduire pafois &agrave; des r&eacute;sultats faux. Ex. :
+</p>
+
+<p class="example">
+{GNU Emacs}
+</p>
+
+<!-- foo
+<p>
+Vous devez choisir ce dernier avec Tkanamzu ou namazu.el.
+</p>
+-->
+
+<h3><a name="query-substring" id="query-substring">Correspondance de sous-cha&icirc;ne</a></h3>
+<p>
+Il existe trois types de recherche de sous-cha&icirc;ne.
+</p>
+
+<dl> 
+<dt>Correspondance pr&eacute;fix&eacute;e</dt>
+<dd><code class="example">inter*</code> (les termes qui commence par <code>inter</code>)</dd>
+<dt>Correspondance int&eacute;rieure</dt>
+<dd><code class="example">*text*</code> (les termes qui contiennent <code>text</code>)</dd>
+<dt>Correspondance postfix&eacute;e</dt>
+<dd><code class="example">*net</code> (les termes qui finissent
+par <code>net</code>)</dd>
+</dl>
+
+
+<h3><a name="query-regex" id="query-regex">Expressions r&eacute;guli&egrave;res</a></h3>
+
+<p>
+Vous pouvez utiliser les expressions r&eacute;guli&egrave;res pour la recherche. Les
+expressions r&eacute;guli&egrave;res doivent &ecirc;tre entour&eacute;es par des slashes comme <code
+class="operator">/.../</code>. Namazu utilise le moteur d'expressions r&eacute;guli&egrave;res de <a
+href="http://www.ruby-lang.org/">Ruby</a>. Il permet g&eacute;n&eacute;ralement une compatibilit&eacute; avec <a
+href="http://www.perl.com/">Perl</a>.
+Ex. :
+</p>
+
+<p class="example">
+/pro(gram|blem)s?/
+</p>
+
+
+<h3><a name="query-field" id="query-field">Recherche de champ sp&eacute;cifique</a></h3>
+<p>
+Vous pouvez limiter votre recherche &agrave; des champs sp&eacute;cifiques tel que
+<code>Subject:</code>, <code>From:</code>,
+<code>Message-Id:</code>. Cela est particuli&egrave;rement utile pour 
+les documents de type Courrier &eacute;lectronique/Message de forums de discussions. Ex. :
+</p>
+
+<ul>
+<li><code class="example">+subject:Linux</code><br>
+(Retrouve tous les documents qui contiennent <code>Linux</code>
+dans le champ <code>Subject:</code>)
+</li>
+
+<li><code class="example">+subject:"GNU Emacs"</code><br>
+(Retrouve tous les documents qui contiennent <code>GNU Emacs</code>
+dans le champ <code>Subject:</code>)
+</li>
+
+<li><code class="example">+from:foo@example.jp</code><br>
+(Retrouve tous les documents qui contiennent <code>foo@example.jp</code>
+dans le champ <code>From:</code>)
+</li>
+
+
+<li><code class="example">+message-id:&lt;199801240555.OAA18737@foo.example.jp&gt;</code><br>
+(Retrouve un document qui contient le 
+<code>Message-Id:</code> sp&eacute;cifi&eacute;)
+</li>
+</ul>
+
+<h3><a name="query-notes" id="query-notes">Notes</a></h3>
+
+<ul>
+<li>Dans toutes les requ&ecirc;tes, Namazu ignore les distinctions de casse des
+caract&egrave;res de l'alphabet. Autrement dit, Namazu fait
+toujours une recherche ind&eacute;pendante de la casse.
+</li>
+
+
+<li>Les phrases japonaises sont forc&eacute;es &agrave; &ecirc;tre segment&eacute;es en
+morph&egrave;mes automatiquement et sont g&eacute;r&eacute;es comme <a
+href="#query-phrase">une recherche de phrase</a>. Ce proc&eacute;d&eacute;
+conduit parfois &agrave; des segmentations invalides.
+</li>
+
+
+<li>L'alphabet, les nombres ou une partie des caract&egrave;res symboles (copi&eacute;s de l'
+ASCII) qui sont d&eacute;finis dans le JIS X 0208 (Standards 
+Industriel Japonais) sont g&eacute;r&eacute;s en tant que caract&egrave;res ASCII.
+</li>
+
+<li>Namazu peut g&eacute;rer un terme qui contient des symboles comme 
+<code>TCP/IP</code>. Etant donn&eacute; que cette gestion n'est pas compl&egrave;te,
+vous pouvez d&eacute;crire <code>TCP and IP</code> au lieu de 
+<code>TCP/IP</code>, mais cela peut conduire &agrave; des r&eacute;sultats impr&eacute;cis.
+</li>
+
+
+<li>La recherche de sous-cha&icirc;nes et de champs sp&eacute;cifiques prend
+plus de temps que les autres m&eacute;thodes.
+</li>
+
+<li>Si vous voulez utiliser les op&eacute;rateurs <code class="operator">and</code>,
+<code class="operator">or</code> ou <code
+class="operator">not</code> en tant que termes, vous pouvez
+les entourer respectivement avec des guillemets comme <code
+class="operator">"..."</code> ou des accolades comme <code
+class="operator">{...}</code>. 
+
+<!-- foo
+Vous devez choisir ce dernier avec Tkanamzu ou namazu.el.
+-->
+</li>
+
+</ul>
+
