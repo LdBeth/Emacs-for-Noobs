@@ -45,12 +45,12 @@
 
 * =Emacs on Windows= 下载与图片支持
   直接从[[https://www.gnu.org/software/emacs/][官网]] 下载是比较好的，选择一个临近的站点，直接下载即可。在下载页面都有官
-  方的文件说明。官网现在提供Emacs25.1的软件包和支持包：
+  方的文件说明。官网现在提供 Emacs25.1 的软件包和支持包：
   =emacs-n-x86_64-w64-mingw32.zip (64 bit)= and =emacs-n-i686-w64-mingw32.zip (32
   bit)= 下载后直接解压即可。还有相对应的支持包=emacs-n-x-deps.zip= , 把里面的文件复
   制进上面解压后的文件夹里，直接提供了图片的 dll 文件支持。在前面的版本(如
-  Emacs24.5)里，下载后的软件里 =\share\emacs\24.5\= 文件夹下的README文件里可以找到
-  支持图片的dll文件下载地址。
+  Emacs24.5)里，下载后的软件里 =\share\emacs\24.5\= 文件夹下的 README 文件里可以找到
+  支持图片的 dll 文件下载地址。
 
 * =Emacs on Windows= 启动
   解压后的文件里有四个文件夹：bin，libexec，share，var。直接运行 bin 文件夹里的
@@ -82,7 +82,7 @@
     (normal-top-level-add-subdirs-to-load-path))
     ;; 下面是增加的代码
     ;; 设定变量 =Emacs= path: =C:/TC/Software/Emacs/=
-    ;; 去掉路径中Emacs后面的部分设定HOME目录
+    ;; 去掉路径中 Emacs 后面的部分设定 HOME 目录
     (defvar Emacs (replace-regexp-in-string "Emacs.*/$" "Emacs/" data-directory :from-end)) 
     (setenv "HOME" (concat Emacs "Home-spacemacs/"))
 
@@ -192,9 +192,9 @@
 
 * 待补充（尽管提意见）……
 
-  #+begin_quote 
+#+BEGIN_QUOTE
   不过在没有一年的修炼之前 千万不要猜 Emacs 不能做什么... 重点是头脑灵活,既坚信
   Emacs 无所不能，也适当变通 
 
                                -- 陈斌《一年成为 Emacs 高手》
-  #+end_quote
+#+END_QUOTE
