@@ -2,3 +2,5 @@
 .DS_Store
 # Emacs Lisp
 *.elc
+# namazu
+index*
