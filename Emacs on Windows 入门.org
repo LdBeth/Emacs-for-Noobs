@@ -19,6 +19,7 @@
    - [[#如何使用-spacemacs][如何使用 Spacemacs]]
    - [[#如何使用子龙山人的配置][如何使用子龙山人的配置]]
    - [[#如何使用陈斌的配置][如何使用陈斌的配置]]
+ - [[#编码问题][编码问题]]
  - [[#待补充尽管提意见][待补充（尽管提意见）……]]
 
 * 我对 =Emacs= 的理解
@@ -189,6 +190,40 @@
 
 ** 如何使用陈斌的配置
    他的 [[https://github.com/redguardtoo/emacs.d][github]] 上面详细说明了他的配置安装方法。
+
+* 编码问题
+  Windows 中文系统的编码是 GBK，也就是说新建的文件默认编码是 GBK，这可能会导致
+  Emacs 或者其它 Unix 系应用在处理这些文件的时候出现乱码。同时，将 Emacs 中默认
+  文件编码设置为 UTF-8 并设置 Unix 风格的换行符，有助于文件能被其它操作系统正常
+  处理。
+  #+BEGIN_SRC emacs-lisp
+    ;; 转自 http://blog.csdn.net/bbeikke/article/details/8629677
+    ;; 编码设置 begin
+    (set-language-environment 'Chinese-GB)
+    ;; default-buffer-file-coding-system 变量在 emacs23.2 之后已被废弃，使用 buffer-file-coding-system 代替
+    (set-default buffer-file-coding-system 'utf-8-unix)
+    (set-default-coding-systems 'utf-8-unix)
+    (setq-default pathname-coding-system 'euc-cn)
+    (setq file-name-coding-system 'euc-cn)
+    ;; 另外建议按下面的先后顺序来设置中文编码识别方式。
+    ;; 重要提示:写在最后一行的，实际上最优先使用; 最前面一行，反而放到最后才识别。
+    ;; utf-16le-with-signature 相当于 Windows 下的 Unicode 编码，这里也可写成
+    ;; utf-16 (utf-16 实际上还细分为 utf-16le, utf-16be, utf-16le-with-signature 等多种)
+    (prefer-coding-system 'cp950)
+    (prefer-coding-system 'gb2312)
+    (prefer-coding-system 'cp936)
+    ;;(prefer-coding-system 'gb18030)
+                                            ;(prefer-coding-system 'utf-16le-with-signature)
+    (prefer-coding-system 'utf-16)
+    ;; 新建文件使用 utf-8-unix 方式
+    ;; 如果不写下面两句，只写
+    ;; (prefer-coding-system 'utf-8)
+    ;; 这一句的话，新建文件以 utf-8 编码，行末结束符平台相关
+    (prefer-coding-system 'utf-8-dos)
+    (prefer-coding-system 'utf-8-unix)
+    ;; 编码设置 end
+  #+END_SRC
+  
 
 * 待补充（尽管提意见）……
 
