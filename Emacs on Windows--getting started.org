@@ -63,36 +63,51 @@
   share/emacs/site-lisp/subdirs.el 里面设定它的工作目录即可。
 
 * 设置 =HOME= 目录与 =Portable Emacs= 
-  可以参考[[https://emacs-china.org/t/windows-emacs/797/11][在 windows 平台将 emacs 绿色化的方法]]。下面说一下我配置：
+  可以参考[[https://emacs-china.org/t/windows-emacs/797/11][在 windows 平台将 emacs 绿色化的方法]]。
+1. 下面说一下我配置：
+   1) 我的目录结构：
+    #+begin_example
+      U:/TC/Software/Emacs:
+        |-Emacs-32bit
+        |-Emacs-64bit
+        |-Home
+        `-Home-spacemacs
+    #+end_example
 
-  我的目录结构：
+   2) 新建文件 U:/TC/Software/Emacs/Emacs-64bit/share/emacs/site-lisp/site-start.el
+    或者把下面的代码追加到此目录的subdirs.el文件里。
 
-  #+begin_example
-    C:/TC/Software/Emacs:
-      |-Emacs-32bit
-      |-Emacs-64bit
-      |-Home
-      `-Home-spacemacs
-  #+end_example
+    #+begin_src emacs-lisp
+      ;; 去掉Emacs程序路径中Emacs后面的部分，并将其设为一个变量
+      (defvar Emacs (replace-regexp-in-string "Emacs.*/$" "Emacs/" data-directory :from-end)) 
+      (setenv "HOME" (concat Emacs "Home-spacemacs/"))
+    #+end_src
+    或者可以这样做：
+    #+begin_src emacs-lisp
+      ;; 可以直接获取优盘的盘符U:/ 设定为变量 disk
+      (defvar disk (concat (substring data-directory 0 3)))
+      (setenv "HOME" (concat disk "TC/Software/Emacs/Home"))
+      ;; 上面的 home 和 home-spacemacs 用来存放两份不同的配置。
+    #+end_src
 
-  新建文件 C:/TC/Software/Emacs/Emacs-64bit/share/emacs/site-lisp/site-start.el
-  或者把下面的代码追加到此目录的subdirs.el文件里。
+2. 还有一种方法也可以实现 *Emacs* 的绿色化，而且不用修改 *Emacs* 的原文件。
+   1) 新建文件 *.emacs*
+      文件位置可以自己定。写入下面的代码：
+      #+BEGIN_SRC emacs-lisp
+      ;; 获取优盘的盘符
+      (defvar disk (concat (substring data-directory 0 3)))
+      ;; 设置HOME目录：如 g:/Emacs/Home/
+      (setenv "HOME" (concat disk "Emacs/Home/"))
+      (load-file "~/.emacs.d/init.el")
+      #+END_SRC
 
-  #+begin_src emacs-lisp
-    ;; 去掉Emacs程序路径中Emacs后面的部分，并将其设为一个变量
-    (defvar Emacs (replace-regexp-in-string "Emacs.*/$" "Emacs/" data-directory :from-end)) 
-    (setenv "HOME" (concat Emacs "Home-spacemacs/"))
+   2) 新建 *emacs.bat* 文件。
+      #+BEGIN_SRC shell
+      runemacs.exe -l .emacs
+      #+END_SRC
+      上面的 *runemacs.exe* 和 *.emacs* 分别替换成相应的路径即可。
 
-    ;; 也可以直接设定 HOME 目录
-    (setenv "HOME" "C:/TC/Software/Emacs/Home")
-    ;; 上面的 home 和 home-spacemacs 用来存放两份不同的配置。
-  #+end_src
-
-  如果你想把它放在优盘里，可以这样设置：
-  #+begin_src emacs-lisp
-  (defvar Emacs (concat (substring data-directory 0 3) "TC/Software/Emacs"))
-  ;; (substring data-directory 0 3)就相当于优盘的盘符，你的配置放在优盘里就可以了。
-  #+end_src
+   3) 双击 *bat* 文件运行即可。
 
 * 对 =Emacs= 进行简单配置
   HOME 目录怎么存放配置呢？打开 Emacs， ~C-x C-f~ 输入 =~/.emacs.d/init.el= 或者
