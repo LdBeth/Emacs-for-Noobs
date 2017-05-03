@@ -19,10 +19,7 @@
    - [[#如何使用-spacemacs][如何使用 Spacemacs]]
    - [[#如何使用子龙山人的配置][如何使用子龙山人的配置]]
    - [[#如何使用陈斌的配置][如何使用陈斌的配置]]
-<<<<<<< HEAD:Emacs on Windows--getting started.org
-=======
  - [[#编码问题][编码问题]]
->>>>>>> refs/remotes/origin/master:Emacs on Windows 入门.org
  - [[#待补充尽管提意见][待补充（尽管提意见）……]]
 
 * 我对 =Emacs= 的理解
@@ -49,21 +46,12 @@
 
 * =Emacs on Windows= 下载与图片支持
   直接从[[https://www.gnu.org/software/emacs/][官网]] 下载是比较好的，选择一个临近的站点，直接下载即可。在下载页面都有官
-<<<<<<< HEAD:Emacs on Windows--getting started.org
   方的文件说明。官网现在提供Emacs25.1的软件包和支持包：
   =emacs-n-x86_64-w64-mingw32.zip (64 bit)= and =emacs-n-i686-w64-mingw32.zip (32
   bit)= 下载后直接解压即可。还有相对应的支持包=emacs-n-x-deps.zip= , 把里面的文件复
   制进上面解压后的文件夹里，直接提供了图片的 dll 文件支持。在前面的版本(如
   Emacs24.5)里，下载后的软件里 =\share\emacs\24.5\= 文件夹下的README文件里可以找到
   支持图片的dll文件下载地址。
-=======
-  方的文件说明。官网现在提供 Emacs25.1 的软件包和支持包：
-  =emacs-n-x86_64-w64-mingw32.zip (64 bit)= and =emacs-n-i686-w64-mingw32.zip (32
-  bit)= 下载后直接解压即可。还有相对应的支持包=emacs-n-x-deps.zip= , 把里面的文件复
-  制进上面解压后的文件夹里，直接提供了图片的 dll 文件支持。在前面的版本(如
-  Emacs24.5)里，下载后的软件里 =\share\emacs\24.5\= 文件夹下的 README 文件里可以找到
-  支持图片的 dll 文件下载地址。
->>>>>>> refs/remotes/origin/master:Emacs on Windows 入门.org
 
 * =Emacs on Windows= 启动
   解压后的文件里有四个文件夹：bin，libexec，share，var。直接运行 bin 文件夹里的
@@ -87,7 +75,6 @@
       `-Home-spacemacs
   #+end_example
 
-<<<<<<< HEAD:Emacs on Windows--getting started.org
   新建文件 C:/TC/Software/Emacs/Emacs-64bit/share/emacs/site-lisp/site-start.el
   或者把下面的代码追加到此目录的subdirs.el文件里。
 
@@ -97,21 +84,6 @@
     (setenv "HOME" (concat Emacs "Home-spacemacs/"))
 
     ;; 也可以直接设定 HOME 目录
-=======
-  编辑文件 C:/TC/Software/Emacs/Emacs-64bit/share/emacs/site-lisp/subdirs.el
-
-  #+begin_src emacs-lisp
-    ;; 原有代码不动
-    (if (fboundp 'normal-top-level-add-subdirs-to-load-path)
-    (normal-top-level-add-subdirs-to-load-path))
-    ;; 下面是增加的代码
-    ;; 设定变量 =Emacs= path: =C:/TC/Software/Emacs/=
-    ;; 去掉路径中 Emacs 后面的部分设定 HOME 目录
-    (defvar Emacs (replace-regexp-in-string "Emacs.*/$" "Emacs/" data-directory :from-end)) 
-    (setenv "HOME" (concat Emacs "Home-spacemacs/"))
-
-    ;; 可以直接设定 HOME 目录
->>>>>>> refs/remotes/origin/master:Emacs on Windows 入门.org
     (setenv "HOME" "C:/TC/Software/Emacs/Home")
     ;; 上面的 home 和 home-spacemacs 用来存放两份不同的配置。
   #+end_src
@@ -119,11 +91,7 @@
   如果你想把它放在优盘里，可以这样设置：
   #+begin_src emacs-lisp
   (defvar Emacs (concat (substring data-directory 0 3) "TC/Software/Emacs"))
-<<<<<<< HEAD:Emacs on Windows--getting started.org
   ;; (substring data-directory 0 3)就相当于优盘的盘符，你的配置放在优盘里就可以了。
-=======
-  ;; (substring data-directory 0 3)就相当于优盘的盘符
->>>>>>> refs/remotes/origin/master:Emacs on Windows 入门.org
   #+end_src
 
 * 对 =Emacs= 进行简单配置
@@ -219,11 +187,6 @@
 ** 如何使用陈斌的配置
    他的 [[https://github.com/redguardtoo/emacs.d][github]] 上面详细说明了他的配置安装方法。
 
-<<<<<<< HEAD:Emacs on Windows--getting started.org
-* 待补充（尽管提意见）……
-
-  #+begin_quote 
-=======
 * 编码问题
   Windows 中文系统的编码是 GBK，也就是说新建的文件默认编码是 GBK，这可能会导致
   Emacs 或者其它 Unix 系应用在处理这些文件的时候出现乱码。同时，将 Emacs 中默认
@@ -256,18 +219,13 @@
     (prefer-coding-system 'utf-8-unix)
     ;; 编码设置 end
   #+END_SRC
-  
 
 * 待补充（尽管提意见）……
 
 #+BEGIN_QUOTE
->>>>>>> refs/remotes/origin/master:Emacs on Windows 入门.org
   不过在没有一年的修炼之前 千万不要猜 Emacs 不能做什么... 重点是头脑灵活,既坚信
   Emacs 无所不能，也适当变通 
 
                                -- 陈斌《一年成为 Emacs 高手》
-<<<<<<< HEAD:Emacs on Windows--getting started.org
-  #+end_quote
-=======
 #+END_QUOTE
->>>>>>> refs/remotes/origin/master:Emacs on Windows 入门.org
+
