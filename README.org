@@ -14,7 +14,7 @@
 
 ** TODO Todo List
    + Mail Client
-     - [X] GNUS
+     - [ ] GNUS
        + [ ] Score
      - [X] Mew
      - [X] WanderLust
@@ -22,3 +22,5 @@
    + [ ] Emacs Lisp
    + [ ] Wiki
    + [ ] Magit
+
+** GNU General Public License v3.0

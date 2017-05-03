@@ -1,0 +1,86 @@
+#+TITLE: W3M Shimbun - A tool for reading a newspaper
+#+AUTHOR: LdBeth
+#+STARTUP: showall
+
+* 目录                                                                  :TOC:
+ - [[#什么是-shimbun][什么是 Shimbun？]]
+ - [[#安装和开始][安装和开始]]
+   - [[#gnus][GNUS]]
+   - [[#mew][Mew]]
+   - [[#wanderlust][WanderLust]]
+
+* 什么是 Shimbun？
+  Shimbun，日文为 新聞（しん　ぶん）。顾名思义，这是用来阅读新闻的。它是属于 w3m
+  的一个模块，用于将各种网站、BBS 上的文章收取并转换成可供邮件客户端阅读的格式。
+  本质上类似于更加常见的 RSS Feed、Atom Feed。至于为什么 w3m 会提供这种功能，好
+  吧，很多人眼里 w3m 是一个终端下的浏览器，其实它实质上是一个阅读器（Pager），只
+  是顺带支持了 http 协议而已。
+
+* 安装和开始
+  想要在 Emacs 中使用 Shimbun，需要安装 =w3m= 可执行文件和 Emacs 界面 =w3m.el=
+  。如果你是用 elpa 安装的插件，还需要额外从安装 =shimbun.el= ，因为这个包在
+  melpa 是和 w3m 是分开的。而从官方下载的 =w3m.el= 除了包含了 =shimbun.el= 以外，
+  还提供了 texi 格式的使用文档。你可以用 =texi2pdf= 把它转化成 PDF 格式。
+
+  具体的安装就不用解释了。
+
+** GNUS
+   如果用 Gnus 阅读 Shimbun，需要在 =.gnus.el= 里加上如下配置：
+   #+BEGIN_SRC emacs-lisp
+     (require 'nnshimbun)
+     (eval-after-load "gnus-group"
+       '(define-key gnus-group-mode-map "Gn"
+          'gnus-group-make-shimbun-group))
+   #+END_SRC
+  
+   然后就可以用 ~G n~ 创建 Shimbun 条目了。需要注意的是，一般在重新启动后创建的
+   条目才会生效。
+
+** Mew
+   这个的配置就有点麻烦了。
+   #+BEGIN_SRC emacs-lisp
+     ;;; Loading mew-shimbun, defining keys.
+     ;; (setq mew-shimbun-use-unseen t) ;;;5
+     (require ’mew-shimbun)
+     (define-key mew-summary-mode-map "G" (make-sparse-keymap))
+     (define-key mew-summary-mode-map "Gg" 'mew-shimbun-goto-folder)
+     (define-key mew-summary-mode-map "GG" 'mew-shimbun-goto-unseen-folder)
+     (define-key mew-summary-mode-map "Gi" 'mew-shimbun-retrieve)
+     (define-key mew-summary-mode-map "GI" 'mew-shimbun-retrieve-all)
+     (define-key mew-summary-mode-map "Gr" 'mew-shimbun-re-retrieve)
+     (define-key mew-summary-mode-map "GR" 'mew-shimbun-re-retrieve-all)
+     (define-key mew-summary-mode-map "Ge" 'mew-shimbun-expire)
+     (define-key mew-summary-mode-map "GE" 'mew-shimbun-expire-all)
+
+     ;; Specifying ‘shimbun’ servers and groups to be read with Mew in the
+     ;; mew-shimbun-folder-groups variable. Each element has the form
+     ;; ("folder" ("server.group" . range) ...). You can use all,
+     ;; last, and a number for the range item.
+     (setq mew-shimbun-folder-groups
+           ’(;; Fetching ‘yomiuri.shakai’, ‘yomiuri.sports’, etc.
+              ;; into the ‘+shimbun/yomiuri’ folder collectively.
+              ("yomiuri"
+               ("yomiuri.shakai" . 2) ("yomiuri.sports". 2) ("yomiuri.kokusai". 2))
+              ;; Fetching ‘security-memo.memo’
+              ;;
+              ;; into ‘+shimbun/security-memo’.
+              ("security-memo"
+               ("security-memo.memo" . 2)) ("slashdot-jp"
+                                            ("slashdot-jp.story" . last))
+               ;; You can read several groups in one folder (‘+shimbun/emacs’)
+               ;; as follows even if each group comes from a different server.
+               ("emacs"
+                ("airw.wl" . last)
+                ("emacs-w3m.emacs-w3m" . last))
+               ;; Fetching diaries into ‘+shimbun/hns/arisawa’ and
+               ;; ‘+shimbun/hns/miyoshi’ respectively.
+               ("hns/arisawa"
+                ("hns.arisawa" . last)) ("hns/miyoshi"
+                                         ("hns.miyoshi" . last))))
+   #+END_SRC
+   
+   具体的配置可以看 =customize-group= 。
+
+** WanderLust
+   WanderLust 内建对 Shimbun 的支持，用 =@= 来定义的邮件文件夹就是 Shimbun 文件
+   夹，具体细节文档中已经有说明。

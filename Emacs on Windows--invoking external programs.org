@@ -1,4 +1,4 @@
-#+TITLE: Emacs on Windows外部程序调用
+#+TITLE: Emacs on Windows 外部程序调用
 #+AUTHOR: Zhixing
 #+STARTUP: showall
 
@@ -11,16 +11,16 @@
 * 程序调用
 =Emacs= 在 =Windows= 上使用时要不可避免的调用外部程序，一般情况下是要把可执行文件的路
 径加入到 =exec-path= 里面即可。如：
-#+BEGIN_SRC emacs lisp
+#+BEGIN_SRC emacs-lisp
 (add-to-list 'exec-path "path/to/program/")
 #+END_SRC
 
-但是，对某些程序来说，上面的方法没有产生应有的效果。 winterTTr 提供了
-一个比较省事的方法: [[http://www.voidcn.com/blog/winterttr/article/p-3231165.html][emacs调用外部命令的环境设置]] ，主要原因是外部程序的调
-用有时也需要emacs的子进程去调用，所以需要把路径加入到 =PATH= 里面。
+但是，对某些程序来说，上面的方法没有产生应有的效果。winterTTr 提供了
+一个比较省事的方法: [[http://www.voidcn.com/blog/winterttr/article/p-3231165.html][emacs 调用外部命令的环境设置]] ，主要原因是外部程序的调
+用有时也需要 emacs 的子进程去调用，所以需要把路径加入到 =PATH= 里面。
 把下面的代码加进配置即可。
 
-#+BEGIN_SRC emacs lisp
+#+BEGIN_SRC emacs-lisp
   (defun wttr/prepend-to-exec-path (path)
     "prepand the path to the emacs intenral `exec-path' and \"PATH\" env variable.
 Return the updated `exec-path'"
@@ -46,18 +46,18 @@ Return the updated `exec-path'"
 官网直接提供了制件便携版的方法。
 
 调用这个程序时，上面的方法没有产生应有的效果，可以使用下面的代码：
-#+BEGIN_SRC emacs lisp
+#+BEGIN_SRC emacs-lisp
 (custom-set-variables '(epg-gpg-program "path/to/program/")) 
 #+END_SRC
 
 
 * Git
  =Git= 做为一个轻量、高效的版本控制工具，是 =Emacser= 应该掌握的工具之一。
-它的学习也非常简单，官网提供的 =Pro Git中文版= 可以让你在一晚上学会它的使用。
+它的学习也非常简单，官网提供的 =Pro Git 中文版= 可以让你在一晚上学会它的使用。
 它的初始配置也非常简单，只需要运行 =config= 来设置一下自己的用户名和邮箱就可以了。
 我这里要说的是 =Portable Git= 的初始设置。
 首先运行 =git-bash.exe= ，直接运行手册上的命令即可：
-#+BEGIN_SRC emacs lisp
+#+BEGIN_SRC emacs-lisp
 $ git config --system user.name "yourname"
 $ git config --system user.email youremail
 #+END_SRC

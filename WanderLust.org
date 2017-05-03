@@ -36,6 +36,7 @@ All mail clients suck. -cira, the author of another mail client, mutt
    - [[#邮件头显示了一大堆乱七八糟的东西][邮件头显示了一大堆乱七八糟的东西]]
    - [[#如何在读信时显示邮件列表][如何在读信时显示邮件列表]]
    - [[#自动删除邮件和自动归类邮件][自动删除邮件和自动归类邮件]]
+   - [[#如何插入附件][如何插入附件]]
 
 * 简介
   WanderLust 是一个完全用 Emacs Lisp 实现的一个不需要在 Emacs 之外进行配置的邮件客
@@ -339,3 +340,8 @@ All mail clients suck. -cira, the author of another mail client, mutt
              ))
      (add-hook 'wl-summary-prepared-hook 'wl-summary-expire)
    #+END_SRC
+
+** 如何插入附件
+   WandeLust 用 =SEMI= 这个包处理 MIME。如果你对 MIME 没有概念的话，简单来说就是
+   附件处理。你只要在 =wl-draft-mode= 下按 ~C-c C-x TAB~ =mime-edit-insert-file=
+   就可以插入附件了。
