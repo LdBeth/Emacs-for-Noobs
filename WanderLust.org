@@ -19,10 +19,10 @@ All mail clients suck. -cira, the author of another mail client, mutt
     - [[#可以随意绑定热键][可以随意绑定热键]]
     - [[#设置条件挂钩][设置条件挂钩]]
     - [[#批量邮件处理][批量邮件处理]]
-    - [[#_任选编辑器_][_任选编辑器_]]
+    - [[#任选编辑器][+任选编辑器+]]
     - [[#高级的-mime-支持][高级的 MIME 支持]]
     - [[#支持-pgp-加密][支持 PGP 加密]]
-    - [[#_mutt_-wanderlust-是免费的][_Mutt_ WanderLust 是免费的]]
+    - [[#mutt-wanderlust-是免费的][+Mutt+ WanderLust 是免费的]]
 - [[#开始][开始]]
 - [[#配置收信方式][配置收信方式]]
   - [[#一个相对复杂的范例][一个相对复杂的范例]]
@@ -71,19 +71,21 @@ All mail clients suck. -cira, the author of another mail client, mutt
    同样这也仰仗于 Emacs。
 
 *** 批量邮件处理
-   当然可以了！
+   当然可以了！你可以通过标记系统批量处理邮件，也可以用 Emacs Lisp 自动化邮件处
+   理。
 
-*** _任选编辑器_
+*** +任选编辑器+
    额，这个好像做不到。不过你用的 Emacs 已经是最好的编辑器（为了防止被打我得加个
    “之一”）了，而且你也可以用 Evil。
 
 *** 高级的 MIME 支持
-   WangderLust 依赖于用 Emacs Lisp 实现的 MIME，能够很好地处理各种文件。
+   WangderLust 依赖于用 Emacs Lisp 实现的 MIME —— SEMI，能够很好地处理各种文件。
 
 *** 支持 PGP 加密
-   我得说 Emacs 本来就支持。你可以用 =mailcrypt= 来用 GPG 加密邮件。
+   Emacs 内建的几个包能作为 PGP 的前端。你可以用 =EasyPG= 或 =PGG= 来用 GPG 加密
+   邮件。
 
-*** _Mutt_ WanderLust 是免费的
+*** +Mutt+ WanderLust 是免费的
    听了上面那么多好处之后，还有比这更好的消息吗？
    
 
