@@ -38,6 +38,7 @@ All mail clients suck. -cira, the author of another mail client, mutt
   - [[#自动删除邮件和自动归类邮件][自动删除邮件和自动归类邮件]]
   - [[#如何插入附件][如何插入附件]]
   - [[#如何利用-org-mode-发送-html-邮件][如何利用 Org-mode 发送 html 邮件]]
+  - [[#x-face][X-face]]
 
 * 简介
   WanderLust 是一个完全用 Emacs Lisp 实现的一个不需要在 Emacs 之外进行配置的邮件客
@@ -358,3 +359,63 @@ All mail clients suck. -cira, the author of another mail client, mutt
 
    然后只需要在 =org-mode= 中写好邮件内容后运行 ~M-x~
    =org-mime-org-buffer-htmlize= ，就会新建一封 html 格式的邮件。
+
+** X-face
+   #+BEGIN_QUOTE
+   有时候在 Article buffer 顶部有个小小的图片,是什么？我发的帖子如何加上？
+
+   那些图片称为 X-Face，是一些 48*48 的黑白图片，被编码为一行邮件头
+   (header line)，如果你也想加一个，需要把图片转换 X-Face。用一个图片处
+   理程序（比如 gimp），打开你想要的图片，剪切相应部分，将颜色降低为
+   1bit，改变大小到 48*48，另存为位图(bitmap)。从 this site
+   (ftp://ftp.cs.indiana.edu:/pub/faces/) 取来 compface 包，通过如下命
+   令，创建一个 X-face：
+
+   cat file.xbm | xbm2ikon |compface > file.face
+   cat ./file.face | sed 's/\/\\/g' | sed 's/\"/\\"/g' > ./file.face.quoted
+
+   如果不能使用 compface，还有另一个 X-face 转换器：
+   http://www.dairiki.org/xface/. 如果在 MS Windows 上，也可以用
+   WinFace 程序：http://www.xs4all.nl/~walterln/winface/. 然后只需要
+   在 ~/.gnus 中告诉 Gnus 在你的帖子里面加入 X-face：
+
+   (setq message-default-headers
+   (with-temp-buffer
+   (insert "X-Face: ")
+   (insert-file-contents "~/.xemacs/xface")
+   (buffer-string)))
+   #+END_QUOTE
+   
+   From: http://blog.csdn.net/lujun9972/article/details/46002803
+
+    X-face 是在邮件／新闻组时代很流行的东西。就和现在的 Gravatar 差不多。甚至以
+    前的 IRC 也能显示 X-face 头像。
+    
+    原理就是在邮件的 Header 部分嵌入一段专门的代码，在读入的时候转换成一个 48x48
+    的黑白图片，比如我的头像的代码就是：
+
+    #+BEGIN_SRC text
+    0@1]t/p1\-TYA>y*B},]Iv$z1v-o$C/G)\m9=?bWtc9/yca-)cV,[jIwgM(=|h85EAfU7'+b_|+m$TU.6bsD5SGd/RTu.h+}8b>OCDNCDr_#zv"H:o23#+m@g5USw)-74icq8Q(6Dy?Lkc+3P&v%2yerI[)FWEljAhOcZKz3bH6b&QEYd{Vm'g]\7.5bCsb?jqKKk0e%SlU[sL'Jok%WNH_ql4c;/HD`OR,3NBbzKgT9$Mbz;"y~;&Gi-3aa
+    #+END_SRC
+    
+    在 WanderLust 中，设置 X-face 很简单，只要把生成的代码作为纯文本文件保存在 ~/.xface 就会自动读取。
+
+    #+BEGIN_QUOTE
+    但是显示出来只是代码，不是图片？
+    #+END_QUOTE
+
+    这个嘛，我看了看 WanderLust 的手册，里面提到要用 Mule 来处理。Mule 是 Emacs
+    21 之前不支持 UTF-8 的时候用来处理字体和编码的包，现在 Emacs 21 以后可以用
+    x-face-e21.el 来处理，不需要 Mule。
+
+    可以在这里下载：
+    http://www.jpl.org/ftp/pub/elisp/
+
+    然后
+    #+BEGIN_SRC emacs-lisp
+      (autoload 'x-face-decode-message-header "x-face-e21")
+      (setq wl-highlight-x-face-function 'x-face-decode-message-header)
+    #+END_SRC
+    
+    你还要从包管理器装 compface 来转换出图片。
+    
