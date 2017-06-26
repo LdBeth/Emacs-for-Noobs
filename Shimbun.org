@@ -3,11 +3,12 @@
 #+STARTUP: showall
 
 * 目录                                                                  :TOC:
- - [[#什么是-shimbun][什么是 Shimbun？]]
- - [[#安装和开始][安装和开始]]
-   - [[#gnus][GNUS]]
-   - [[#mew][Mew]]
-   - [[#wanderlust][WanderLust]]
+- [[#什么是-shimbun][什么是 Shimbun？]]
+- [[#安装和开始][安装和开始]]
+  - [[#gnus][GNUS]]
+  - [[#mew][Mew]]
+  - [[#wanderlust][WanderLust]]
+- [[#rss][RSS]]
 
 * 什么是 Shimbun？
   Shimbun，日文为 新聞（しん　ぶん）。顾名思义，这是用来阅读新闻的。它是属于 w3m
@@ -84,3 +85,26 @@
 ** WanderLust
    WanderLust 内建对 Shimbun 的支持，用 =@= 来定义的邮件文件夹就是 Shimbun 文件
    夹，具体细节文档中已经有说明。
+
+* RSS
+  Shimbun 提供了 =sb-rss-hash= 和 =sb-atom-hash= 来处理 RSS。
+
+  在配置中加入如下。
+
+  #+BEGIN_SRC emacs-lisp
+    (setq shimbun-rss-hash-group-path-alist
+          '(("xkcd" "https://xkcd.com/rss.xml")
+            ("acgpiping" "http://www.acgpiping.net/feed/")
+            ("moonlight" "http://feed.williamlong.info/")))
+  #+END_SRC
+  
+  然后根据 MUA 设置 shimbun 模块，比如用 WanderLust，在 .folder 中加上：
+
+  #+BEGIN_SRC conf-unix
+    NEWS {
+         @rss-hash.xkcd "xkcd"  
+         @rss-hash.acgpiping "ACG"
+         @rss-hash.moonlight "MoonLight"
+    }
+  #+END_SRC
+ 

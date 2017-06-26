@@ -39,6 +39,7 @@ All mail clients suck. -cira, the author of another mail client, mutt
   - [[#如何插入附件][如何插入附件]]
   - [[#如何利用-org-mode-发送-html-邮件][如何利用 Org-mode 发送 html 邮件]]
   - [[#x-face][X-face]]
+  -  [[#乱码][乱码？]]
 
 * 简介
   WanderLust 是一个完全用 Emacs Lisp 实现的一个不需要在 Emacs 之外进行配置的邮件客
@@ -419,3 +420,6 @@ All mail clients suck. -cira, the author of another mail client, mutt
     
     你还要从包管理器装 compface 来转换出图片。
     
+**  乱码？
+   出现乱码，可以设置 =wl-mime-charset= 为 ='gbk= ，或者其它合适的值。你也可以设
+   置 =wl-folder-mime-charset-alist= 。
