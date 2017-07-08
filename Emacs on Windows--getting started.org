@@ -3,24 +3,24 @@
 #+STARTUP: showall
 
 * 目录                                                                  :TOC:
- - [[#我对-emacs-的理解][我对 =Emacs= 的理解]]
- - [[#网上的优秀资源待补充][网上的优秀资源（待补充）]]
-   - [[#一年成为-emacs-高手像神一样使用编辑器-from-陈斌][一年成为 Emacs 高手(像神一样使用编辑器) from 陈斌。]]
-   - [[#spacemacs-rocks-from-子龙山人][Spacemacs-rocks from 子龙山人]]
-   - [[#emacs-中文论坛][Emacs 中文论坛]]
-   - [[#planet-emacsen][Planet Emacsen]]
- - [[#emacs-on-windows-下载与图片支持][=Emacs on Windows= 下载与图片支持]]
- - [[#emacs-on-windows-启动][=Emacs on Windows= 启动]]
- - [[#设置-home-目录与-portable-emacs][设置 =HOME= 目录与 =Portable Emacs=]]
- - [[#对-emacs-进行简单配置][对 =Emacs= 进行简单配置]]
- - [[#安装-package][安装 =package=]]
- - [[#使用-aspell-来检查拼写][使用 =Aspell= 来检查拼写]]
- - [[#如何使用大牛的配置][如何使用大牛的配置]]
-   - [[#如何使用-spacemacs][如何使用 Spacemacs]]
-   - [[#如何使用子龙山人的配置][如何使用子龙山人的配置]]
-   - [[#如何使用陈斌的配置][如何使用陈斌的配置]]
- - [[#编码问题][编码问题]]
- - [[#待补充尽管提意见][待补充（尽管提意见）……]]
+- [[#我对-emacs-的理解][我对 =Emacs= 的理解]]
+- [[#网上的优秀资源待补充][网上的优秀资源（待补充）]]
+  - [[#一年成为-emacs-高手像神一样使用编辑器-from-陈斌][一年成为 Emacs 高手(像神一样使用编辑器) from 陈斌。]]
+  - [[#spacemacs-rocks-from-子龙山人][Spacemacs-rocks from 子龙山人]]
+  - [[#emacs-中文论坛][Emacs 中文论坛]]
+  - [[#planet-emacsen][Planet Emacsen]]
+- [[#emacs-on-windows-下载与图片支持][=Emacs on Windows= 下载与图片支持]]
+- [[#emacs-on-windows-启动][=Emacs on Windows= 启动]]
+- [[#设置-home-目录与-portable-emacs][设置 =HOME= 目录与 =Portable Emacs=]]
+- [[#对-emacs-进行简单配置][对 =Emacs= 进行简单配置]]
+- [[#安装-package][安装 =package=]]
+- [[#使用-aspell-来检查拼写][使用 =Aspell= 来检查拼写]]
+- [[#如何使用大牛的配置][如何使用大牛的配置]]
+  - [[#如何使用-spacemacs][如何使用 Spacemacs]]
+  - [[#如何使用子龙山人的配置][如何使用子龙山人的配置]]
+  - [[#如何使用陈斌的配置][如何使用陈斌的配置]]
+- [[#编码问题][编码问题]]
+- [[#待补充尽管提意见][待补充（尽管提意见）……]]
 
 * 我对 =Emacs= 的理解
   1. 只要是关于文本的，它就能实现，前提是你会 lisp 语言。
@@ -201,6 +201,11 @@
 
 ** 如何使用陈斌的配置
    他的 [[https://github.com/redguardtoo/emacs.d][github]] 上面详细说明了他的配置安装方法。
+
+   安装过程中如果无法安装package，可能是源的问题，需要更改源。
+   更改 =~/.emacs.d/lisp/init-elpa.el= 里面设置 *package-archives* 的部分
+   把 https://melpa.org/packages/ 换成 http://elpa.emacs-china.org/melpa/
+   把 https://stable.melpa.org/packages/ 换成 http://elpa.emacs-china.org/melpa-stable/
 
 * 编码问题
   Windows 中文系统的编码是 GBK，也就是说新建的文件默认编码是 GBK，这可能会导致
