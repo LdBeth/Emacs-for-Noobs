@@ -3,24 +3,26 @@
 #+STARTUP: showall
 
 * 目录                                                                  :TOC:
- - [[#我对-emacs-的理解][我对 =Emacs= 的理解]]
- - [[#网上的优秀资源待补充][网上的优秀资源（待补充）]]
-   - [[#一年成为-emacs-高手像神一样使用编辑器-from-陈斌][一年成为 Emacs 高手(像神一样使用编辑器) from 陈斌。]]
-   - [[#spacemacs-rocks-from-子龙山人][Spacemacs-rocks from 子龙山人]]
-   - [[#emacs-中文论坛][Emacs 中文论坛]]
-   - [[#planet-emacsen][Planet Emacsen]]
- - [[#emacs-on-windows-下载与图片支持][=Emacs on Windows= 下载与图片支持]]
- - [[#emacs-on-windows-启动][=Emacs on Windows= 启动]]
- - [[#设置-home-目录与-portable-emacs][设置 =HOME= 目录与 =Portable Emacs=]]
- - [[#对-emacs-进行简单配置][对 =Emacs= 进行简单配置]]
- - [[#安装-package][安装 =package=]]
- - [[#使用-aspell-来检查拼写][使用 =Aspell= 来检查拼写]]
- - [[#如何使用大牛的配置][如何使用大牛的配置]]
-   - [[#如何使用-spacemacs][如何使用 Spacemacs]]
-   - [[#如何使用子龙山人的配置][如何使用子龙山人的配置]]
-   - [[#如何使用陈斌的配置][如何使用陈斌的配置]]
- - [[#编码问题][编码问题]]
- - [[#待补充尽管提意见][待补充（尽管提意见）……]]
+- [[#我对-emacs-的理解][我对 =Emacs= 的理解]]
+- [[#网上的优秀资源待补充][网上的优秀资源（待补充）]]
+  - [[#一年成为-emacs-高手像神一样使用编辑器-from-陈斌][一年成为 Emacs 高手(像神一样使用编辑器) from 陈斌。]]
+  - [[#spacemacs-rocks-from-子龙山人][Spacemacs-rocks from 子龙山人]]
+  - [[#emacs-中文论坛][Emacs 中文论坛]]
+  - [[#planet-emacsen][Planet Emacsen]]
+- [[#必须知道的知识点][必须知道的知识点]]
+  - [[#三个命令][三个命令]]
+- [[#emacs-on-windows-下载与图片支持][=Emacs on Windows= 下载与图片支持]]
+- [[#emacs-on-windows-启动][=Emacs on Windows= 启动]]
+- [[#设置-home-目录与-portable-emacs][设置 =HOME= 目录与 =Portable Emacs=]]
+- [[#对-emacs-进行简单配置][对 =Emacs= 进行简单配置]]
+- [[#安装-package][安装 =package=]]
+- [[#使用-aspell-来检查拼写][使用 =Aspell= 来检查拼写]]
+- [[#如何使用大牛的配置][如何使用大牛的配置]]
+  - [[#如何使用-spacemacs][如何使用 Spacemacs]]
+  - [[#如何使用子龙山人的配置][如何使用子龙山人的配置]]
+  - [[#如何使用陈斌的配置][如何使用陈斌的配置]]
+- [[#编码问题][编码问题]]
+- [[#待补充尽管提意见][待补充（尽管提意见）……]]
 
 * 我对 =Emacs= 的理解
   1. 只要是关于文本的，它就能实现，前提是你会 lisp 语言。
@@ -36,13 +38,21 @@
    这是不得不推荐的资源，因为他讲的真的很好。也包括一些 FAQ。
 
 ** [[https://github.com/emacs-china/Spacemacs-rocks][Spacemacs-rocks]] from 子龙山人
-   一系列视频 (Season 2)，Emacs 入门&专业配置都讲 的很好。
+   一系列视频 (Season 2)，Emacs 入门&专业配置都讲的很好。
 
 ** [[https://emacs-china.org/][Emacs 中文论坛]]
    可能是最好的中文论坛。
 
 ** [[http://planet.emacsen.org][Planet Emacsen]]
    学习 Lisp 有成以后可以来这里找些小众技巧，锻练英语阅读。
+
+* 必须知道的知识点
+** 三个命令
+M-x describe-variable, 快捷键 C-h v, =查看变量=
+M-x describe-function, 快捷键 C-h f, =查看命令=
+M-x describe-key,      快捷键 C-h k, =查看快捷键=
+上面的三个命令配合Smex来使用可以让你快速了解你想知道的事情。Smex可以在你下知道整
+个命令或者函数名的时候进行模糊搜索。
 
 * =Emacs on Windows= 下载与图片支持
   直接从[[https://www.gnu.org/software/emacs/][官网]] 下载是比较好的，选择一个临近的站点，直接下载即可。在下载页面都有官
