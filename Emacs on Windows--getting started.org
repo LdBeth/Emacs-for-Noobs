@@ -51,7 +51,7 @@
 M-x describe-variable, 快捷键 C-h v, =查看变量=
 M-x describe-function, 快捷键 C-h f, =查看命令=
 M-x describe-key,      快捷键 C-h k, =查看快捷键=
-上面的三个命令配合Smex来使用可以让你快速了解你想知道的事情。Smex可以在你下知道整
+上面的三个命令配合Smex来使用可以让你快速了解你想知道的事情。Smex可以在你不知道整
 个命令或者函数名的时候进行模糊搜索。
 
 * =Emacs on Windows= 下载与图片支持
@@ -211,6 +211,11 @@ M-x describe-key,      快捷键 C-h k, =查看快捷键=
 
 ** 如何使用陈斌的配置
    他的 [[https://github.com/redguardtoo/emacs.d][github]] 上面详细说明了他的配置安装方法。
+
+   安装过程中如果无法安装package，可能是源的问题，需要更改源。
+   更改 =~/.emacs.d/lisp/init-elpa.el= 里面设置 *package-archives* 的部分
+   把 https://melpa.org/packages/ 换成 http://elpa.emacs-china.org/melpa/
+   把 https://stable.melpa.org/packages/ 换成 http://elpa.emacs-china.org/melpa-stable/
 
 * 编码问题
   Windows 中文系统的编码是 GBK，也就是说新建的文件默认编码是 GBK，这可能会导致
