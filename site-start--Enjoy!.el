@@ -3,11 +3,10 @@
 ;;; 下面的配置最好只保留设置HOME项。
 
 ;; 设置HOME目录为Emacs程序下的子文件夹 "Home/"，利于便携化。
-(defvar Emacs (replace-regexp-in-string "Emacs/share/emacs/????/etc.*$" "Emacs/" data-directory :from-end))
-(defvar home (concat Emacs "Home/"))
-(unless (file-exists-p home)
-  (make-directory home :parents))
-(setenv "HOME" (concat home))
+(defvar emacs-home (replace-regexp-in-string "share.*$" "HOME/" data-directory :from-end))
+(unless (file-exists-p emacs-home)
+  (make-directory emacs-home :parents))
+(setenv "HOME" (concat emacs-home))
 
 
 ;;; 后面的配置可以用来体验Emacs做为强大编辑器的魅力。
@@ -19,11 +18,12 @@
 ;;                          ("melpa" . "http://elpa.emacs-china.org/melpa/")))
 ;; (package-initialize)
 
-;; 安装use-package，用于管理package的配置。
+;;; 安装use-package，用于管理package的配置。
 ;; (unless (package-installed-p 'use-package)
 ;;   (package-refresh-contents)
 ;;   (package-install 'use-package))
-;; 自动安装包。举例：chinese-fonts-setup，用于设置字体
+
+;;; 自动安装包。举例：chinese-fonts-setup，用于设置字体
 ;; (use-package chinese-fonts-setup
 ;;   :ensure t   ;; 自动安装包
 ;;   :config

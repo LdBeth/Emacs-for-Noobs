@@ -74,29 +74,23 @@ M-x describe-key,      快捷键 C-h k, =查看快捷键=
 
 * 设置 =HOME= 目录与 =Portable Emacs= 
   可以参考[[https://emacs-china.org/t/windows-emacs/797/11][在 windows 平台将 emacs 绿色化的方法]]。
-1. 下面说一下我配置：
-   1) 我的目录结构：
-    #+begin_example
-      U:/TC/Software/Emacs:
-        |-Emacs-32bit
-        |-Emacs-64bit
-        |-Home
-        `-Home-spacemacs
-    #+end_example
-
-   2) 新建文件 U:/TC/Software/Emacs/Emacs-64bit/share/emacs/site-lisp/site-start.el
+1. 设置HOME目录（需修改Emacs程序内文件）
+   新建文件 U:/Emacs/share/emacs/site-lisp/site-start.el
     或者把下面的代码追加到此目录的subdirs.el文件里。
 
     #+begin_src emacs-lisp
-      ;; 去掉Emacs程序路径中Emacs后面的部分，并将其设为一个变量
-      (defvar Emacs (replace-regexp-in-string "Emacs.*/$" "Emacs/" data-directory :from-end)) 
-      (setenv "HOME" (concat Emacs "Home-spacemacs/"))
+      ;; 设定Emacs程序的HOME路径
+      (defvar emacs-home (replace-regexp-in-string "share.*/$" "HOME/" data-directory :from-end)) 
+      (unless (file-exists-p emacs-home)
+          (make-directory emacs-home :parents))
+      ;; 设定$HOME
+      (setenv "HOME" (concat emacs-home))
     #+end_src
     或者可以这样做：
     #+begin_src emacs-lisp
       ;; 可以直接获取优盘的盘符U:/ 设定为变量 disk
       (defvar disk (concat (substring data-directory 0 3)))
-      (setenv "HOME" (concat disk "TC/Software/Emacs/Home"))
+      (setenv "HOME" (concat disk "Home/"))
       ;; 上面的 home 和 home-spacemacs 用来存放两份不同的配置。
     #+end_src
 
@@ -104,16 +98,19 @@ M-x describe-key,      快捷键 C-h k, =查看快捷键=
    1) 新建文件 *.emacs*
       文件位置可以自己定。写入下面的代码：
       #+BEGIN_SRC emacs-lisp
-      ;; 获取优盘的盘符
-      (defvar disk (concat (substring data-directory 0 3)))
-      ;; 设置HOME目录：如 g:/Emacs/Home/
-      (setenv "HOME" (concat disk "Emacs/Home/"))
-      (load-file "~/.emacs.d/init.el")
+        ;; 获取优盘的盘符，并设置home路径
+        (defvar emacs-home (concat (substring data-directory 0 3) "HOME/"))
+        ;; 创建目录
+        (unless (file-exists-p emacs-home)
+            (make-directory emacs-home :parents))
+        ;; 设置$HOME目录：如 g:/Home/
+        (setenv "HOME" (concat emacs-home))
+        (load-file "~/.emacs.d/init.el")
       #+END_SRC
 
    2) 新建 *emacs.bat* 文件。
       #+BEGIN_SRC shell
-      runemacs.exe -l .emacs
+      runemacs.exe -l g:/.emacs
       #+END_SRC
       上面的 *runemacs.exe* 和 *.emacs* 分别替换成相应的路径即可。
 
