@@ -423,3 +423,7 @@ All mail clients suck. -cira, the author of another mail client, mutt
 **  乱码？
    出现乱码，可以设置 =wl-mime-charset= 为 ='gbk= ，或者其它合适的值。你也可以设
    置 =wl-folder-mime-charset-alist= 。
+
+   如果是标题部分出现乱码，这可不是 WanderLust 的错，而是因为对方用了不规范的邮
+   件头编码，不过你可以通过设置 =mime-header-accept-quoted-encoded-words= 来让它
+   能正确解码不规范的邮件头。
