@@ -22,6 +22,8 @@
   - [[#如何使用子龙山人的配置][如何使用子龙山人的配置]]
   - [[#如何使用陈斌的配置][如何使用陈斌的配置]]
 - [[#编码问题][编码问题]]
+  - [[#为不同的程序设置编码][为不同的程序设置编码]]
+  - [[#修改编码][修改编码]]
 - [[#待补充尽管提意见][待补充（尽管提意见）……]]
 
 * 我对 =Emacs= 的理解
@@ -172,8 +174,10 @@ M-x describe-key,      快捷键 C-h k, =查看快捷键=
   #+begin_src emacs-lisp
     (add-to-list 'exec-path "~/Aspell/bin/")
     (setq ispell-program-name "aspell")
-    (require 'flyspell-correct-ido)
-    (setq flyspell-correct-interface #'flyspell-correct-ido)
+    (use-package flyspell-correct-ido
+      :config
+      (require 'flyspell-correct-ido)
+      (setq flyspell-correct-interface #'flyspell-correct-ido))
   #+end_src
   具体 flyspell-correct 的使用见它的 README
 
@@ -211,6 +215,25 @@ M-x describe-key,      快捷键 C-h k, =查看快捷键=
    把 https://stable.melpa.org/packages/ 换成 http://elpa.emacs-china.org/melpa-stable/
 
 * 编码问题
+** 为不同的程序设置编码
+许多程序是由Linux系统上移植过来的，所以对Windows用户可能并不友好。
+常见的编码问题是Emacs中的Eshell和Shell中出现乱码。可以使用下面 =修改编码= 的方法来
+解决问题。
+如果是rg，pt，git等小程序导致的问题，可以使用论坛上网友提供的一种方法。通过设置
+程序的输入输出编码来解决问题。
+#+BEGIN_SRC emacs-lisp
+  ;; https://emacs-china.org/t/topic/3894/22
+  (when (eq system-type 'windows-nt)
+    (set-default 'process-coding-system-alist
+                 '(("[pP][lL][iI][nN][kK]" gbk-dos . gbk-dos)
+                   ("[cC][mM][dD][pP][rR][oO][xX][yY]" gbk-dos . gbk-dos)
+                   ("[rR][gG]" utf-8-dos . gbk-dos)
+                   ("[pP][tT]" utf-8-dos . gbk-dos)
+                   ("[gG][iI][tT]" utf-8-dos . gbk-dos)
+                   )))
+#+END_SRC
+
+** 修改编码
   Windows 中文系统的编码是 GBK，也就是说新建的文件默认编码是 GBK，这可能会导致
   Emacs 或者其它 Unix 系应用在处理这些文件的时候出现乱码。同时，将 Emacs 中默认
   文件编码设置为 UTF-8 并设置 Unix 风格的换行符，有助于文件能被其它操作系统正常
