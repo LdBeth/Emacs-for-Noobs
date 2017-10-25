@@ -170,9 +170,8 @@ M-x describe-key,      快捷键 C-h k, =查看快捷键=
   它的安装文件，放在优盘里），Emacs 只要调用它就可以了。我会把我使用的 Aspell 程
   序压缩后放在群文件里。安装 =flyspell-correct= 后，添加下面的代码即可：
   #+begin_src emacs-lisp
-    (add-to-list 'exec-path (concat Files "Misc/Aspell/bin/"))
+    (add-to-list 'exec-path "~/Aspell/bin/")
     (setq ispell-program-name "aspell")
-    (setq ispell-process-directory (concat Files "Misc/Aspell/"))
     (require 'flyspell-correct-ido)
     (setq flyspell-correct-interface #'flyspell-correct-ido)
   #+end_src
