@@ -23,11 +23,9 @@
 ;;   (package-refresh-contents)
 ;;   (package-install 'use-package))
 
-;;; 自动安装包。举例：chinese-fonts-setup，用于设置字体
-;; (use-package chinese-fonts-setup
-;;   :ensure t   ;; 自动安装包
+;; Automatically install package, such as cnfonts
+;; (use-package cnfonts
 ;;   :config
-;;   ;; 让 chinese-fonts-setup 随着 emacs 自动生效。
-;;   (chinese-fonts-setup-enable)
-;;   ;; 让 spacemacs mode-line 中的 Unicode 图标正确显示。
-;;   (cfs-set-spacemacs-fallback-fonts))
+;;   (cnfonts-enable)
+;;   (add-hook 'after-make-frame-functions #'cnfonts-set-font-with-saved-step))
+

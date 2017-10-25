@@ -151,19 +151,16 @@ M-x describe-key,      快捷键 C-h k, =查看快捷键=
   在上面的代码后面加上如下代码即可：
 
   #+begin_src emacs-lisp
-  ;; Install use-package
-  (unless (package-installed-p 'use-package)
-          (package-refresh-contents)
-          (package-install 'use-package))
-  ;; Automatically install package, such as chinese-fonts-setup
-  (use-package chinese-fonts-setup
-       :ensure t
-       :config
-       ;; 让 chinese-fonts-setup 随着 emacs 自动生效。
-       (chinese-fonts-setup-enable)
-       ;; 让 spacemacs mode-line 中的 Unicode 图标正确显示。
-       (cfs-set-spacemacs-fallback-fonts))
-  #+end_src
+    ;; Install use-package
+    (unless (package-installed-p 'use-package)
+      (package-refresh-contents)
+      (package-install 'use-package))
+    ;; Automatically install package, such as cnfonts
+    (use-package cnfonts
+      :config
+      (cnfonts-enable)
+      (add-hook 'after-make-frame-functions #'cnfonts-set-font-with-saved-step)
+    #+end_src
   建议每个人都安装这个 package，或者通过网络上的其它方法来设置中英文字体，否则
   Emacs 会很卡。
 
