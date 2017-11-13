@@ -17,6 +17,7 @@
 - [[#对-emacs-进行简单配置][对 =Emacs= 进行简单配置]]
 - [[#安装-package][安装 =package=]]
 - [[#使用-aspell-来检查拼写][使用 =Aspell= 来检查拼写]]
+- [[#在emacs中写latex][在Emacs中写LaTeX]]
 - [[#如何使用大牛的配置][如何使用大牛的配置]]
   - [[#如何使用-spacemacs][如何使用 Spacemacs]]
   - [[#如何使用子龙山人的配置][如何使用子龙山人的配置]]
@@ -80,14 +81,17 @@ M-x describe-key,      快捷键 C-h k, =查看快捷键=
    新建文件 U:/Emacs/share/emacs/site-lisp/site-start.el
     或者把下面的代码追加到此目录的subdirs.el文件里。
 
-    #+begin_src emacs-lisp
-      ;; 设定Emacs程序的HOME路径
-      (defvar emacs-home (replace-regexp-in-string "share.*/$" "HOME/" data-directory :from-end)) 
-      (unless (file-exists-p emacs-home)
-          (make-directory emacs-home :parents))
-      ;; 设定$HOME
-      (setenv "HOME" (concat emacs-home))
-    #+end_src
+   #+begin_src emacs-lisp
+     ;; 设定Emacs程序的HOME路径
+     (defvar emacs-home
+       (replace-regexp-in-string "bin/" "HOME/" invocation-directory :from-end))
+
+     (unless (file-exists-p emacs-home)
+       (make-directory emacs-home :parents))
+
+     ;; 设定$HOME
+     (setenv "HOME" (concat emacs-home))
+   #+end_src
     或者可以这样做：
     #+begin_src emacs-lisp
       ;; 可以直接获取优盘的盘符U:/ 设定为变量 disk
@@ -180,6 +184,16 @@ M-x describe-key,      快捷键 C-h k, =查看快捷键=
       (setq flyspell-correct-interface #'flyspell-correct-ido))
   #+end_src
   具体 flyspell-correct 的使用见它的 README
+  
+* 在Emacs中写LaTeX
+在Emacs里直接安装Auctex即可。(前提是安装了texlive，并加进了$PATH中，同时安装了use-package)
+#+BEGIN_SRC emacs-lisp
+(use-package tex
+  :ensure t
+  :config
+ )
+#+END_SRC
+打开任意一个.tex文件，C-c C-c，即可选择编译程序并进行编译，C-c C-l来预览。
 
 * 如何使用大牛的配置
   强烈推荐使用 [[https://github.com/redguardtoo/emacs.d][陈斌的配置]] 或者是  [[https://github.com/syl20bnr/spacemacs/tree/develop][Spacemacs]] 。 [[https://github.com/zilongshanren/spacemacs-private][子龙山人的配置]] 是私人定制的，使用
