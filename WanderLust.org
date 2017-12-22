@@ -129,6 +129,8 @@ All mail clients suck. -cira, the author of another mail client, mutt
         .inbox "Bug Reports"
       }
     }
+    # 一个以 `/' 结束的访问组，解析整个文件夹结构
+    %maildir/clear@mail.domain.com:993! /
   #+end_src
   
   明白了吗？这就是一个邮箱入口列表了，用不同的标记来告诉 WanderLust 到哪里取邮件。
@@ -272,6 +274,8 @@ All mail clients suck. -cira, the author of another mail client, mutt
              (wl-local-domain . "mail.company.com"))
              ("From" . wl-from)))
   #+end_src
+
+  密码用可 =~/.authinfo= 配置。
 
 ** 使用 =sendmail/msmtp=
    如果你已经安装并设置过 =sendmail= 或者 =msmtp= ，你当然也可以用这两个 MUA 来发件。
