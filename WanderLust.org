@@ -285,7 +285,7 @@ All mail clients suck. -cira, the author of another mail client, mutt
    #+END_SRC
 
    对于 macOS 用户，可以用系统自带的 Postfix，见
-   [[http://www.postfix.org/SOHO_README.html#client_sasl_enable][Enabling SASL authentication in the Postfix SMTP client]
+   [[http://www.postfix.org/SOHO_README.html#client_sasl_enable][Enabling SASL authentication in the Postfix SMTP client]]
    以及 [[http://www.postfix.org/SOHO_README.html#client_sasl_sender][Configuring Sender-Dependent SASL authentication]]。
 
    用 =launchctl= 启动 Postfix (macOS BigSur 以后)
