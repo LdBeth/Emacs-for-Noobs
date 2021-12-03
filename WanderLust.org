@@ -283,9 +283,32 @@ All mail clients suck. -cira, the author of another mail client, mutt
    #+BEGIN_SRC emacs-lisp
      (setq wl-draft-send-mail-function 'wl-draft-send-mail-with-sendmail)
    #+END_SRC
+
+   对于 macOS 用户，可以用系统自带的 Postfix，见
+   [[http://www.postfix.org/SOHO_README.html#client_sasl_enable][Enabling SASL authentication in the Postfix SMTP client]
+   以及 [[http://www.postfix.org/SOHO_README.html#client_sasl_sender][Configuring Sender-Dependent SASL authentication]]。
+
+   用 =launchctl= 启动 Postfix (macOS BigSur 以后)
+   #+BEGIN_SRC shell
+   launchctl enable system/com.apple.postfix.master 
+   #+END_SRC
+
+   发完查看 =/var/mail/= 看是否有退信。如果有
+
+   #+BEGIN_EXAMPLE
+   501 Mail from address must be same as authorization
+    user.
+   #+END_EXAMPLE
+
+   原因是要设置
    
+   #+BEGIN_SRC emacs-lisp
+     (setq mail-specify-envelope-from t
+           mail-envelope-from <你用于 SMTP 的邮箱>)
+   #+END_SRC
+
    如果用的是 =msmtp= ，还需要一些额外配置，详见 [[https://www.emacswiki.org/emacs/GnusMSMTP][EmacsWiki]] 。
-  
+
 * MailDir 设置
   尽管 WanderLust 是一个 IMAP 客户端，它也支持用 MailDir。而且不像 GNUS 是把邮件
   全部导入到本地文件夹，WanderLust 是直接对 MailDir 进行读写操作，这使得它可以和
