@@ -2,11 +2,11 @@
 #+AUTHOR: LdBeth
 #+STARTUP: showall
 
-#+begin_quote 
+#+begin_quote
 All mail clients suck. -cira, the author of another mail client, mutt
 #+end_quote
 
-#+begin_quote 
+#+begin_quote
 但是后来我发现其它 email 程序都有某种我不喜欢的怪毛病。-- 《Mutt 使用指南》
 #+end_quote
 
@@ -89,7 +89,7 @@ All mail clients suck. -cira, the author of another mail client, mutt
 
 *** +Mutt+ WanderLust 是免费的
    听了上面那么多好处之后，还有比这更好的消息吗？
-   
+
 
 * 开始
   好吧，实际上这个插件极度缺少说明，你几乎无法找到任何介绍这个包的中文资料，甚至
@@ -97,7 +97,7 @@ All mail clients suck. -cira, the author of another mail client, mutt
 
   但是至少有自带的 Emacs Manual 可以看。据说日文版的使用手册比英文版的还要详细一
   点。
-  
+
   因为这个包可以直接在 melpa 上找到，安装部分就略过。唯一值得注意的是因为依赖包
   比较多，可能要重启几次 Emacs 才能保证安装成功。
 
@@ -114,7 +114,7 @@ All mail clients suck. -cira, the author of another mail client, mutt
           'wl-draft-kill
           'mail-send-hook))
   #+end_src
-  
+
 
 * 配置收信方式
   WanderLust 用 =~/.folders= 来配置收信方式。非常令人无语的是，这个文件是
@@ -132,7 +132,7 @@ All mail clients suck. -cira, the author of another mail client, mutt
     # 一个以 `/' 结束的访问组，解析整个文件夹结构
     %maildir/clear@mail.domain.com:993! /
   #+end_src
-  
+
   明白了吗？这就是一个邮箱入口列表了，用不同的标记来告诉 WanderLust 到哪里取邮件。
   =%= 表示 IMAP 信箱， =.= 表示本地 MailDir 格式的信箱， =&= 表示 POP 信箱。这甚
   至比用 Emacs Lisp 配置还要直观，让我想起了用 Org-mode 来配置 RSS Feeds 的
@@ -141,7 +141,7 @@ All mail clients suck. -cira, the author of another mail client, mutt
 
   生成的邮件列表结构是这样的：
 
-  #+begin_example 
+  #+begin_example
         总邮箱
          |-收件箱（一个实际邮件文件夹）
          `-INBOX（这个则是用来分类的一个文件夹）
@@ -150,7 +150,7 @@ All mail clients suck. -cira, the author of another mail client, mutt
            `-Work
              `-Bug Reports（本地 MailDir）
   #+end_example
-  
+
   你应该可以看出来，通过这种方式很容易就能同时收取多个邮箱。
 
 ** 一个相对复杂的范例
@@ -178,7 +178,7 @@ All mail clients suck. -cira, the author of another mail client, mutt
        }
     }
 
-    #Note: usernames with "strange" characters (like "@") must be written 
+    #Note: usernames with "strange" characters (like "@") must be written
     #like: "myname@company.com". Folders at my work are delimited by dot '.'.
     WORK{
        %INBOX:"myname@company.com"/clear@mail.company.com        "Inbox"
@@ -196,7 +196,7 @@ All mail clients suck. -cira, the author of another mail client, mutt
 
    虽然其实也可以直接用 WanderLust 的文件夹管理器来设置，但在第一次启动时最好还是
    了解一下如何配置。
-  
+
 ** 举例
   如果你需要马上上手的话，我就用比较常见的 QQ 邮箱举例了。
 
@@ -214,7 +214,7 @@ All mail clients suck. -cira, the author of another mail client, mutt
   #+BEGIN_SRC conf-unix
     %inbox:"john@gmail.com"/clear@imap.gmail.com:993!  "Gmail"
   #+END_SRC
-  
+
   当然你也可以用 Emacs Lisp 来配置，不过一般不推荐这样做。
 
   #+BEGIN_SRC emacs-lisp
@@ -290,7 +290,7 @@ All mail clients suck. -cira, the author of another mail client, mutt
 
    用 =launchctl= 启动 Postfix (macOS BigSur 以后)
    #+BEGIN_SRC shell
-   launchctl enable system/com.apple.postfix.master 
+   launchctl enable system/com.apple.postfix.master
    #+END_SRC
 
    发完查看 =/var/mail/= 看是否有退信。如果有
@@ -301,7 +301,7 @@ All mail clients suck. -cira, the author of another mail client, mutt
    #+END_EXAMPLE
 
    原因是要设置
-   
+
    #+BEGIN_SRC emacs-lisp
      (setq mail-specify-envelope-from t
            mail-envelope-from <你用于 SMTP 的邮箱>)
@@ -339,12 +339,12 @@ All mail clients suck. -cira, the author of another mail client, mutt
            (append wl-message-sort-field-list
                    '("^Reply-To" "^Posted" "^Date" "^Organization")))
    #+END_SRC
-   
+
 ** 如何在读信时显示邮件列表
    #+BEGIN_SRC emacs-lisp
      (setq wl-stay-folder-window t)
    #+END_SRC
-   
+
 ** 自动删除邮件和自动归类邮件
    #+BEGIN_SRC emacs-lisp
      ;; Refile rule
@@ -413,19 +413,19 @@ All mail clients suck. -cira, the author of another mail client, mutt
    (insert-file-contents "~/.xemacs/xface")
    (buffer-string)))
    #+END_QUOTE
-   
+
    From: http://blog.csdn.net/lujun9972/article/details/46002803
 
     X-face 是在邮件／新闻组时代很流行的东西。就和现在的 Gravatar 差不多。甚至以
     前的 IRC 也能显示 X-face 头像。
-    
+
     原理就是在邮件的 Header 部分嵌入一段专门的代码，在读入的时候转换成一个 48x48
     的黑白图片，比如我的头像的代码就是：
 
     #+BEGIN_SRC text
     0@1]t/p1\-TYA>y*B},]Iv$z1v-o$C/G)\m9=?bWtc9/yca-)cV,[jIwgM(=|h85EAfU7'+b_|+m$TU.6bsD5SGd/RTu.h+}8b>OCDNCDr_#zv"H:o23#+m@g5USw)-74icq8Q(6Dy?Lkc+3P&v%2yerI[)FWEljAhOcZKz3bH6b&QEYd{Vm'g]\7.5bCsb?jqKKk0e%SlU[sL'Jok%WNH_ql4c;/HD`OR,3NBbzKgT9$Mbz;"y~;&Gi-3aa
     #+END_SRC
-    
+
     在 WanderLust 中，设置 X-face 很简单，只要把生成的代码作为纯文本文件保存在 ~/.xface 就会自动读取。
 
     #+BEGIN_QUOTE
@@ -434,7 +434,7 @@ All mail clients suck. -cira, the author of another mail client, mutt
 
     这个嘛，我看了看 WanderLust 的手册，里面提到要用 Mule 来处理。Mule 是 Emacs
     21 之前不支持 UTF-8 的时候用来处理字体和编码的包，现在 Emacs 21 以后可以用
-    x-face-e21.el 来处理，不需要 Mule。
+    =x-face-e21.el= 来处理，不需要 Mule。
 
     可以在这里下载：
     http://www.jpl.org/ftp/pub/elisp/
@@ -444,9 +444,43 @@ All mail clients suck. -cira, the author of another mail client, mutt
       (autoload 'x-face-decode-message-header "x-face-e21")
       (setq wl-highlight-x-face-function 'x-face-decode-message-header)
     #+END_SRC
-    
+
     你还要从包管理器装 compface 来转换出图片。
-    
+
+    我现在维护了一个支持 Emacs 27 的版本。和其它一些插件可以在这里找到：
+    https://github.com/LdBeth/InfernoEmacs/blob/master/core/
+
+** LSDB
+   如果你不喜欢用 BBDB 的话可以用这个。
+
+   #+BEGIN_SRC  emacs-lisp
+     (require 'lsdb)
+     (lsdb-wl-insinuate)
+     (define-key wl-draft-mode-map "\M-\t" 'lsdb-complete-name)
+     (define-key wl-summary-mode-map ":" 'lsdb-wl-toggle-buffer)
+   #+END_SRC
+
+   如果你已经装了 =x-face-e21.el= ，会自动配置显示 xface。
+
+   我不想让广告邮件的发件人被记下来：
+
+   #+BEGIN_SRC  emacs-lisp
+     (setq lsdb-boring-names-list '("Overloud\\|KVR Audio\\|Github"))
+   #+END_SRC
+
+** Mu-cite
+   功能和自带的 =supercite= 类似，我改得更顺手了点。
+
+   #+BEGIN_SRC  emacs-lisp
+     (use-package mu-cite
+       :defer t
+       :init
+       (setq mu-cite-prefix-format '(lsdb-prefix-register "> "))
+       (add-hook 'mail-citation-hook 'mu-cite-original)
+       :config
+       (lsdb-mu-insinuate))
+   #+END_SRC
+
 **  乱码？
    出现乱码，可以设置 =wl-mime-charset= 为 ='gbk= ，或者其它合适的值。你也可以设
    置 =wl-folder-mime-charset-alist= 。
