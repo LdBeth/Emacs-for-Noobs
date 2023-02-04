@@ -387,6 +387,8 @@ All mail clients suck. -cira, the author of another mail client, mutt
 
    然后只需要在 =org-mode= 中写好邮件内容后运行 ~M-x~
    =org-mime-org-buffer-htmlize= ，就会新建一封 html 格式的邮件。
+   
+   我做的 [[LsmL][https://ldbeth.sdf.org/lsml/]] 也可以用来生成 HTML 邮件。
 
 ** X-face
    #+BEGIN_QUOTE
@@ -481,6 +483,13 @@ All mail clients suck. -cira, the author of another mail client, mutt
        (lsdb-mu-insinuate))
    #+END_SRC
 
+** GnuPG
+如果用 EasyPG 出现 =inappropriate ioctl for device= 错误，记得在配置中加上
+
+#+BEGIN_SRC emacs-list
+(setq epa-pinentry-mode 'loopback)
+#+END_SRC
+
 **  乱码？
    出现乱码，可以设置 =wl-mime-charset= 为 ='gbk= ，或者其它合适的值。你也可以设
    置 =wl-folder-mime-charset-alist= 。
@@ -488,3 +497,4 @@ All mail clients suck. -cira, the author of another mail client, mutt
    如果是标题部分出现乱码，这可不是 WanderLust 的错，而是因为对方用了不规范的邮
    件头编码，不过你可以通过设置 =mime-header-accept-quoted-encoded-words= 来让它
    能正确解码不规范的邮件头。
+
