@@ -486,7 +486,7 @@ All mail clients suck. -cira, the author of another mail client, mutt
 ** GnuPG
 如果用 EasyPG 出现 =inappropriate ioctl for device= 错误，记得在配置中加上
 
-#+BEGIN_SRC emacs-list
+#+BEGIN_SRC emacs-lisp
 (setq epa-pinentry-mode 'loopback)
 #+END_SRC
 
