@@ -332,17 +332,18 @@ GMail{
 }
 #+end_src
 
-之后在首次连接时 WanderLust 会依次提示输入 OAuth2 Client ID 和 Secret，输入
-后会在浏览器打开选择 Google 账号的页面，同意授权后，会提示无法访问页面，但不要慌，
-把地址栏里的 =code= 参数复制下来输入 WanderLust 就可以了。
+之后在首次连接时 WanderLust 会依次提示输入 OAuth2 Client ID 和 Secret，并创建
+plstore 的 passpharse，输入后会在浏览器打开选择 Google 账号的页面，同意授权后，
+会提示无法访问页面，但不要慌，把地址栏里的 =code= 参数复制下来输入 WanderLust 就可以了。
 
-为了以后不用每次输入 Client ID 和 Secret，在 =.wl= 可以加入：
+为了以后不用每次输入 Client ID 和 Secret 和 passpharse，在 =.wl= 可以加入：
 
 #+begin_src emacs-lisp
 (setq sasl-xoauth2-host-user-id-table
       '(("\\.gmail\\.com$" <用户名的正则>
          <OAuth2 Client ID>
-         <Oauth2 Secret>)))
+         <Oauth2 Secret>))
+      plstore-cache-passphrase-for-symmetric-encryption t)
 #+end_src
 
 * MailDir 设置
