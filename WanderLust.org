@@ -319,9 +319,12 @@ Google 账号的情形，这个就是用的 OAuth2。用 OAuth2 登陆 IMAP/POP3
 是为了减少在不安全的地方储存和传输密码的风险。
 #+END_QUOTE
 
-使用之前需要在 [[https://console.cloud.google.com][Google Console]] 注册应用程序来得到 OAuth2 Client ID 和 Secret，备用。
+使用之前需要在 [[https://console.cloud.google.com][Google Console]] 注册应用程序来
+得到 OAuth2 Client ID 和 Secret，备用。
 
-在 =.folder= 文件里用 =xoath2= 验证类型：
+同时，要保证 EasyPG 和 GnuPG 能够正常使用。
+
+在 =.folders= 文件里用 =xoath2= 验证类型：
 
 #+begin_src conf-unix
 GMail{
@@ -332,6 +335,15 @@ GMail{
 之后在首次连接时 WanderLust 会依次提示输入 OAuth2 Client ID 和 Secret，输入
 后会在浏览器打开选择 Google 账号的页面，同意授权后，会提示无法访问页面，但不要慌，
 把地址栏里的 =code= 参数复制下来输入 WanderLust 就可以了。
+
+为了以后不用每次输入 Client ID 和 Secret，在 =.wl= 可以加入：
+
+#+begin_src emacs-lisp
+(setq sasl-xoauth2-host-user-id-table
+      '(("\\.gmail\\.com$" <用户名的正则>
+         <OAuth2 Client ID>
+         <Oauth2 Secret>)))
+#+end_src
 
 * MailDir 设置
   尽管 WanderLust 是一个 IMAP 客户端，它也支持用 MailDir。而且不像 GNUS 是把邮件
